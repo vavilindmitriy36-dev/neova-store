@@ -1,10 +1,10 @@
 :root {
     --bg-color: #0b0f19;
-    --card-bg: rgba(15, 23, 42, 0.7);
+    --card-bg: #131c2e;
     --accent-color: #38bdf8;
     --text-color: #e2e8f0;
     --text-muted: #94a3b8;
-    --border-color: rgba(255, 255, 255, 0.1);
+    --border-color: rgba(255, 255, 255, 0.08);
 }
 
 * {
@@ -22,25 +22,23 @@ body {
     flex-direction: column;
 }
 
-/* Шапка сайта */
+/* Компактная и аккуратная шапка */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
+    padding: 12px 20px;
     border-bottom: 1px solid var(--border-color);
-    background: rgba(11, 15, 25, 0.9);
+    background: rgba(11, 15, 25, 0.95);
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
     z-index: 100;
-    flex-wrap: wrap;
-    gap: 10px;
 }
 
 .logo {
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     letter-spacing: 2px;
     color: var(--accent-color);
     text-decoration: none;
@@ -54,7 +52,7 @@ nav {
 nav a {
     color: var(--text-muted);
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     transition: color 0.2s;
 }
 
@@ -64,78 +62,89 @@ nav a:hover, nav a.active {
 
 .user-nav {
     display: flex;
-    gap: 12px;
+    gap: 10px;
 }
 
 .user-nav a {
     color: var(--text-color);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
 }
 
-/* Основной контент главной */
+/* Главный блок (Hero) */
 .hero {
-    flex: 1;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 40px 20px;
+    padding: 30px 20px 20px;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
-    gap: 30px;
-}
-
-.hero-text {
-    flex: 1;
+    text-align: center;
+    gap: 25px;
 }
 
 .hero-text h1 {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    margin-bottom: 20px;
+    font-size: 1.8rem;
+    margin-bottom: 12px;
     line-height: 1.2;
 }
 
 .hero-text h1 span {
-    color: var(--accent-name, #38bdf8);
+    color: var(--accent-color);
 }
 
 .hero-text p {
     color: var(--text-muted);
-    margin-bottom: 30px;
-    font-size: 1rem;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .btn {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 10px 20px;
     background: var(--accent-color);
     color: #0b0f19;
     font-weight: 600;
-    border-radius: 6px;
+    font-size: 0.9rem;
+    border-radius: 8px;
     text-decoration: none;
-    transition: opacity 0.2s;
 }
 
-.btn:hover {
-    opacity: 0.9;
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
 }
 
-/* 3D-монитор в стиле референса */
+/* Монитор с глитчем */
 .monitor-container {
     perspective: 1000px;
+    width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 10px;
 }
 
 .monitor {
-    width: min(100%, 360px);
-    height: 220px;
+    width: 100%;
+    max-width: 340px;
+    height: 190px;
     background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
     border: 3px solid rgba(56, 189, 248, 0.3);
-    border-radius: 16px;
+    border-radius: 14px;
     position: relative;
-    box-shadow: 0 25px 50px rgba(0,0,0,0.7), 0 0 30px rgba(56, 189, 248, 0.15);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px rgba(56, 189, 248, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -143,79 +152,116 @@ nav a:hover, nav a.active {
     animation: float 4s ease-in-out infinite;
 }
 
-/* Внутренний экран с неоновым свечением и помехами */
-.monitor::before {
-    content: '';
-    position: absolute;
-    inset: 10px;
-    background: radial-gradient(circle at center, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
-    border-radius: 10px;
-    pointer-events: none;
-}
-
 .screen-content {
     font-family: monospace;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: var(--accent-color);
-    text-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
     animation: screenGlitch 3s infinite;
-    position: relative;
 }
 
-/* Эффект глитча и помех на экране */
 @keyframes screenGlitch {
     0%, 100% { opacity: 1; transform: translate(0); }
     92% { opacity: 1; transform: translate(0); }
-    93% { opacity: 0.3; transform: translate(-2px, 1px); filter: blur(1px); }
-    94% { opacity: 0.9; transform: translate(2px, -1px); filter: none; }
-    95% { opacity: 0.4; transform: translate(-1px, 2px); }
+    93% { opacity: 0.3; transform: translate(-2px, 1px); }
+    94% { opacity: 0.9; transform: translate(2px, -1px); }
     96% { opacity: 1; transform: translate(0); }
-    98% { opacity: 0.6; transform: translate(1px, -1px); }
 }
 
-/* Плавное покачивание монитора */
 @keyframes float {
-    0%, 100% { transform: translateY(0) rotateX(4deg) rotateY(-4deg); }
-    50% { transform: translateY(-8px) rotateX(7deg) rotateY(-7deg); }
+    0%, 100% { transform: translateY(0) rotateX(2deg) rotateY(-2deg); }
+    50% { transform: translateY(-6px) rotateX(5deg) rotateY(-5deg); }
 }
 
-/* Адаптивность для мобильных */
-@media (max-width: 768px) {
-    header {
-        padding: 15px;
-        justify-content: center;
-    }
+/* Секция с товарами (как на видео) */
+.section-title {
+    max-width: 1200px;
+    margin: 30px auto 15px;
+    padding: 0 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
 
-    nav {
-        order: 3;
-        width: 100%;
-        justify-content: center;
-        margin-top: 5px;
-    }
+.products-grid {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    width: 100%;
+}
 
-    .user-nav {
-        order: 2;
-    }
+.product-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
 
-    .logo {
-        order: 1;
-    }
+.badge-sale {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #ef4444;
+    color: white;
+    font-size: 0.7rem;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+}
 
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 30px 15px;
-    }
+.product-img {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
 
-    .hero-text h1 {
-        font-size: 2rem;
-    }
+.product-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-color);
+}
 
-    .monitor {
-        width: 290px;
-        height: 180px;
-    }
+.product-specs {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.price {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent-color);
+}
+
+.cart-btn {
+    background: rgba(56, 189, 248, 0.15);
+    border: none;
+    color: var(--accent-color);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 
 /* Подвал */
@@ -224,5 +270,30 @@ footer {
     padding: 20px;
     border-top: 1px solid var(--border-color);
     color: var(--text-muted);
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    margin-top: auto;
+}
+
+/* На ПК делаем сетку товаров пошире */
+@media (min-width: 768px) {
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .hero {
+        flex-direction: row;
+        text-align: left;
+        justify-content: space-between;
+    }
+    .hero-text {
+        flex: 1;
+    }
+    .hero-text p {
+        margin-left: 0;
+    }
+    .hero-buttons {
+        justify-content: flex-start;
+    }
+    .monitor-container {
+        width: auto;
+    }
 }
