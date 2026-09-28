@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOVA — Интернет-магазин техники</title>
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=11">
 </head>
 <body>
 
@@ -46,7 +46,7 @@
         </div>
     </header>
 
-    <!-- Главный экран -->
+    <!-- Главный экран с RGB рамкой -->
     <main>
         <section class="hero">
             <div class="cyber-display-card">
@@ -129,7 +129,7 @@
         }
     </script>
 
-    <!-- 3D Движок монитора с RGB-подсветкой -->
+    <!-- 3D Движок монитора -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const canvas = document.getElementById('canvas-3d');
@@ -143,14 +143,13 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Освещение сцены
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
+        // Чистое студийное освещение
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         scene.add(ambientLight);
 
-        // Источник динамического RGB света задней панели
-        const rgbLight = new THREE.PointLight(0x00f0ff, 8, 25);
-        rgbLight.position.set(0, 0, -1.2);
-        scene.add(rgbLight);
+        const frontLight = new THREE.PointLight(0xffffff, 4, 30);
+        frontLight.position.set(0, 1, 4);
+        scene.add(frontLight);
 
         const monitorGroup = new THREE.Group();
 
@@ -206,9 +205,9 @@
         monitorGroup.add(screenMesh);
 
         // 4. Подставка
-        const armGeo = new THREE.CylinderGeometry(0.09, 0.12, 1.1, 32);
+        const armGeo = new !== undefined ? new THREE.CylinderGeometry(0.09, 0.12, 1.1, 32) : null;
         const armMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.95, roughness: 0.1 });
-        const arm = new THREE.Mesh(armGeo, armMat);
+        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.12, 1.1, 32), armMat);
         arm.position.set(0, -1.5, -0.2);
         arm.rotation.x = Math.PI / 2.3;
         monitorGroup.add(arm);
@@ -244,13 +243,6 @@
             requestAnimationFrame(animate);
 
             let elapsedTime = clock.getElapsedTime();
-
-            // Плавное переливание RGB-цветов подсветки по кругу спектра (модуляция через синусоиды)
-            let r = Math.sin(elapsedTime * 1.5) * 127 + 128;
-            let g = Math.sin(elapsedTime * 1.5 + 2) * 127 + 128;
-            let b = Math.sin(elapsedTime * 1.5 + 4) * 127 + 128;
-            rgbLight.color.setRGB(r / 255, g / 255, b / 255);
-
             let flashAlpha = (Math.sin(elapsedTime * 5) + 1) / 2 * 0.5 + 0.5;
             drawScreen(flashAlpha);
             screenTexture.needsUpdate = true;
