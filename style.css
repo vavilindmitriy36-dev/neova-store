@@ -65,15 +65,42 @@ header {
     width: 32px;
     height: 32px;
     cursor: pointer;
-    /* Добавляем анимацию цвета и тени для иконки смайлика */
+    position: relative;
     animation: rgbTextCycle 8s infinite linear;
 }
 
 .cyber-logo-container svg {
     width: 100%;
     height: 100%;
-    /* Наследует анимированный цвет от родителя через currentColor */
     filter: drop-shadow(0 0 6px currentColor);
+    transition: transform 0.1s ease;
+}
+
+/* --- КЛАССЫ ДЛЯ ГЛИТЧА ИКОНКИ --- */
+.cyber-logo-container.glitch-active svg {
+    animation: iconGlitch 0.2s cubic-bezier(.25, .46, .45, .94) both;
+    filter: drop-shadow(2px -2px 0px #ff0055) drop-shadow(-2px 2px 0px #00f0ff);
+}
+
+@keyframes iconGlitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-3px, 2px) skew(10deg);
+    }
+    40% {
+        transform: translate(3px, -2px) scale(1.1, 0.9);
+    }
+    60% {
+        transform: translate(-2px, -1px) skew(-15deg);
+    }
+    80% {
+        transform: translate(2px, 2px);
+    }
+    100% {
+        transform: translate(0);
+    }
 }
 
 /* Поиск */
@@ -182,7 +209,7 @@ header {
     display: block;
 }
 
-/* --- ГЛАВНЫЙ БАННЕР (БЕЗ РАМКИ) --- */
+/* --- ГЛАВНЫЙ БАННЕР --- */
 .hero-display-container {
     position: relative;
     margin: 20px;
