@@ -128,8 +128,7 @@
             document.getElementById('overlay').classList.toggle('active');
         }
     </script>
-
-    <!-- 3D Движок монитора -->
+         <!-- 3D Движок монитора (исправленное вертикальное вращение) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const canvas = document.getElementById('canvas-3d');
@@ -194,7 +193,7 @@
             ctx.textBaseline = 'middle';
             ctx.fillText('NEOVA_OS v1.0', screenCanvas.width / 2, screenCanvas.height / 2 - 30);
 
-            // Мигающая интерактивная статус-надпись
+            // Мигающая статус-надпись
             ctx.font = 'bold 32px monospace';
             ctx.fillStyle = `rgba(157, 78, 221, ${flashAlpha})`;
             ctx.shadowColor = '#9d4edd';
@@ -252,7 +251,7 @@
             screenTexture.needsUpdate = true;
 
             targetRotationY = mouseX * 0.6; 
-            targetRotationX = -mouseY * 0.45; 
+            targetRotationX = mouseY * 0.45; // Исправлено: теперь при нажатии сверху монитор наклоняется вниз, снизу — вверх
 
             monitorGroup.rotation.y += (targetRotationY - monitorGroup.rotation.y) * 0.07;
             monitorGroup.rotation.x += (targetRotationX - monitorGroup.rotation.x) * 0.07;
