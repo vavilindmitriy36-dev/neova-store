@@ -234,6 +234,28 @@ header {
     display: block;
 }
 
+/* --- КАТАЛОГ И ФИЛЬТРЫ (ИСПРАВЛЕНО) --- */
+.catalog-controls {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.filters-container {
+    display: none; /* Скрыто по умолчанию */
+    background: #0b111e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 0 20px 20px 20px;
+}
+
+.filters-container.active {
+    display: block; /* Показывается при активации фильтра */
+}
+
 /* Сетка товаров */
 .section-title {
     font-size: 20px;
