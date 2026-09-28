@@ -3,115 +3,353 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NEOVA // Главная</title>
-    <link rel="stylesheet" href="style.css">
+    <title>NEOVA — Интернет-магазин техники</title>
+    <link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
+
+    <!-- Затемнение фона при открытии меню -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- Выдвижное боковое меню слева -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="cyber-logo-link">
+                <div class="cyber-logo-container">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <g class="face-eyes">
+                            <circle cx="8.5" cy="9.5" r="1.5" />
+                            <circle cx="15.5" cy="9.5" r="1.5" />
+                        </g>
+                        <path d="M 8 14 Q 12 18 16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+                <span class="cyber-logo-text">NEOVA</span>
+            </a>
+            <button class="close-btn" onclick="toggleMenu()">&times;</button>
+        </div>
+        <div class="sidebar-nav">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог товаров</a>
+            <a href="delivery.html">Доставка и оплата</a>
+            <a href="wishlist.html">Избранное</a>
+            <a href="profile.html">Личный кабинет</a>
+        </div>
+    </div>
 
     <!-- Шапка сайта -->
     <header>
         <div class="header-left">
-            <button class="menu-btn" id="menuToggle">☰</button>
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <!-- Интерактивный логотип со стикером RGB и глитчами -->
             <a href="index.html" class="cyber-logo-link">
-                <div class="cyber-logo-container" id="logoSticker" title="Кликни меня!">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
-                        <polyline points="2 17 12 22 22 17"></polyline>
-                        <polyline points="2 12 12 17 22 12"></polyline>
+                <div class="cyber-logo-container" id="cyberLogo" title="Кликни меня!">
+                    <svg viewBox="0 0 24 24" id="logoSvg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <g class="face-eyes" id="smileEyes">
+                            <circle cx="8.5" cy="9.5" r="1.5" />
+                            <circle cx="15.5" cy="9.5" r="1.5" />
+                        </g>
+                        <path id="smileMouth" d="M 8 14 Q 12 18 16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
                     </svg>
                 </div>
                 <span class="cyber-logo-text">NEOVA</span>
             </a>
         </div>
         
+        <!-- Строка поиска -->
         <div class="search-bar">
             <span>🔍</span>
-            <input type="text" placeholder="Поиск по экосистеме...">
+            <input type="text" placeholder="Поиск техники...">
         </div>
 
         <div class="user-nav">
-            <a href="catalog.html">🛒</a>
-            <a href="#">👤</a>
+            <a href="wishlist.html" title="Избранное">🤍</a>
+            <a href="cart.html" title="Корзина">🛒</a>
+            <a href="profile.html" title="Профиль">👤</a>
         </div>
     </header>
 
-    <!-- Выдвижное боковое меню -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <span class="logo">НАВИГАЦИЯ</span>
-            <button class="close-btn" id="sidebarClose">&times;</button>
+    <!-- Главный экран -->
+    <main>
+        <section class="hero">
+            <!-- Контейнер главного баннера с чистым 3D монитором -->
+            <div class="hero-display-container">
+                <div class="monitor-container">
+                    <canvas id="canvas-3d"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Популярные товары -->
+        <h2 class="section-title">Выбор покупателей</h2>
+        <div class="products-grid">
+            
+            <!-- Товар 1: Видеокарта RTX 4070 -->
+            <div class="product-card">
+                <div class="badge-sale">-11%</div>
+                <div class="product-img-container">
+                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=500&q=80" alt="NVIDIA GeForce RTX 4070">
+                </div>
+                <div class="product-title">NVIDIA GeForce RTX 4070</div>
+                <div class="product-specs">12 GB GDDR6X • PCIe 4.0</div>
+                <div class="product-footer">
+                    <span class="price">389 990 ₸</span>
+                    <button class="cart-btn">🛒</button>
+                </div>
+            </div>
+
+            <!-- Товар 2: Процессор Ryzen -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=500&q=80" alt="AMD Ryzen 7 7800X3D">
+                </div>
+                <div class="product-title">AMD Ryzen 7 7800X3D</div>
+                <div class="product-specs">8 ядер / 16 потоков • AM5</div>
+                <div class="product-footer">
+                    <span class="price">189 990 ₸</span>
+                    <button class="cart-btn">🛒</button>
+                </div>
+            </div>
+
+            <!-- Товар 3: Игровой монитор -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="Gaming Monitor 27">
+                </div>
+                <div class="product-title">Gaming Monitor 27" 240Hz</div>
+                <div class="product-specs">2560x1440 • IPS</div>
+                <div class="product-footer">
+                    <span class="price">149 990 ₸</span>
+                    <button class="cart-btn">🛒</button>
+                </div>
+            </div>
+
+            <!-- Товар 4: Смартфон -->
+            <div class="product-card">
+                <div class="product-img-container">
+                    <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="NEOVA Smartphone Pro">
+                </div>
+                <div class="product-title">NEOVA Smartphone Pro</div>
+                <div class="product-specs">6.7" AMOLED • 256 GB</div>
+                <div class="product-footer">
+                    <span class="price">279 990 ₸</span>
+                    <button class="cart-btn">🛒</button>
+                </div>
+            </div>
+
         </div>
-        <div class="sidebar-nav">
-            <a href="index.html">Главная</a>
-            <a href="catalog.html">Каталог товаров</a>
-            <a href="#">Кибер-устройства</a>
-            <a href="#">Контакты</a>
-        </div>
-    </div>
-    <div class="overlay" id="overlay"></div>
+    </main>
 
-    <!-- Главный интерактивный баннер -->
-    <div class="hero-display-container">
-        <div class="monitor-container" id="canvas-container"></div>
-    </div>
-
-    <h2 class="section-title">Популярные категории</h2>
-
+    <!-- Подвал -->
     <footer>
-        <p>&copy; 2026 NEOVA Cybernetics. Все права защищены.</p>
+        <p>&copy; 2026 NEOVA. Все права защищены.</p>
     </footer>
 
-    <!-- Подключаем Three.js для 3D-сцены -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Скрипт для меню, интерактивных лиц и глитчей стикера -->
     <script>
-        // Логика мобильного меню
-        const menuToggle = document.getElementById('menuToggle');
-        const sidebar = document.getElementById('sidebar');
-        const sidebarClose = document.getElementById('sidebarClose');
-        const overlay = document.getElementById('overlay');
-
         function toggleMenu() {
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
         }
 
-        menuToggle.addEventListener('click', toggleMenu);
-        sidebarClose.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
+        // Набор лиц для стикера в шапке
+        const faces = [
+            { eyes: '<circle cx="8.5" cy="9.5" r="1.5"/><circle cx="15.5" cy="9.5" r="1.5"/>', mouth: 'M 8 14 Q 12 18 16 14' }, 
+            { eyes: '<path d="M 7 9 L 10 11 M 7 11 L 10 9" stroke="currentColor" stroke-width="1.5"/><path d="M 14 9 L 17 11 M 14 11 L 17 9" stroke="currentColor" stroke-width="1.5"/>', mouth: 'M 8 15 L 16 15' }, 
+            { eyes: '<circle cx="8.5" cy="9.5" r="2"/><path d="M 14 10 L 17 10" stroke="currentColor" stroke-width="2"/>', mouth: 'M 8 14 Q 12 19 16 14' }, 
+            { eyes: '<path d="M 7 10 Q 8.5 8 10 10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M 14 10 Q 15.5 8 17 10" stroke="currentColor" stroke-width="1.5" fill="none"/>', mouth: 'M 10 14 Q 12 12 14 14' }, 
+        ];
 
-        // Интерактивный логотип-стикер (глюк и смена состояний)
-        const sticker = document.getElementById('logoSticker');
-        sticker.addEventListener('click', () => {
-            sticker.classList.add('glitch-active');
-            setTimeout(() => sticker.classList.remove('glitch-active'), 250);
-        });
-
-        // 3D Сцена с монитором
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(60, container.clientWidth / container.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        let currentFaceIndex = 0;
+        const logoContainer = document.getElementById('cyberLogo');
         
+        // Смена лица по клику
+        if (logoContainer) {
+            logoContainer.addEventListener('click', (e) => {
+                currentFaceIndex = (currentFaceIndex + 1) % faces.length;
+                document.getElementById('smileEyes').innerHTML = faces[currentFaceIndex].eyes;
+                document.getElementById('smileMouth').setAttribute('d', faces[currentFaceIndex].mouth);
+            });
+        }
+
+        // Автоматический глитч-эффект на стикере со сменой эмоций
+        function triggerStickerGlitch() {
+            if (!logoContainer) return;
+            
+            logoContainer.classList.add('glitch-active');
+
+            // В самый пик искажения меняем выражение лица стикера случайным образом
+            setTimeout(() => {
+                currentFaceIndex = Math.floor(Math.random() * faces.length);
+                document.getElementById('smileEyes').innerHTML = faces[currentFaceIndex].eyes;
+                document.getElementById('smileMouth').setAttribute('d', faces[currentFaceIndex].mouth);
+            }, 120);
+
+            // Убираем класс глитча после завершения анимации
+            setTimeout(() => {
+                logoContainer.classList.remove('glitch-active');
+            }, 250);
+
+            scheduleNextGlitch();
+        }
+
+        function scheduleNextGlitch() {
+            const randomInterval = Math.random() * 4000 + 3000; // от 3 до 7 секунд
+            setTimeout(triggerStickerGlitch, randomInterval);
+        }
+
+        // Запуск цикла автоматических глитчей стикера
+        scheduleNextGlitch();
+    </script>
+
+    <!-- 3D Движок монитора (исправленный ровный экран) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        const canvas = document.getElementById('canvas-3d');
+        const container = canvas.parentElement;
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(40, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 6.2;
+
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        container.appendChild(renderer.domElement);
 
-        const geometry = new THREE.BoxGeometry(4, 2.4, 0.2);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true });
-        const monitor = new THREE.Mesh(geometry, material);
-        scene.add(monitor);
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+        scene.add(ambientLight);
 
-        camera.position.z = 5;
+        const cyanLight = new THREE.PointLight(0x00f0ff, 6, 50);
+        cyanLight.position.set(-3, 2, 4);
+        scene.add(cyanLight);
+
+        const purpleLight = new THREE.PointLight(0x9d4edd, 5, 50);
+        purpleLight.position.set(3, -2, 4);
+        scene.add(purpleLight);
+
+        const monitorGroup = new THREE.Group();
+
+        // Задняя крышка
+        const backGeo = new THREE.BoxGeometry(4.4, 2.5, 0.15);
+        const backMat = new THREE.MeshStandardMaterial({ color: 0x070b14, metalness: 0.9, roughness: 0.2 });
+        const backCover = new THREE.Mesh(backGeo, backMat);
+        monitorGroup.add(backCover);
+
+        // Рамка экрана
+        const frameGeo = new THREE.BoxGeometry(4.3, 2.4, 0.05);
+        const frameMat = new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.95, roughness: 0.1 });
+        const frame = new THREE.Mesh(frameGeo, frameMat);
+        frame.position.z = 0.07;
+        monitorGroup.add(frame);
+
+        // Экран монитора (ровный центрированный смайлик)
+        const screenGeo = new THREE.PlaneGeometry(4.1, 2.22);
+        
+        const screenCanvas = document.createElement('canvas');
+        screenCanvas.width = 1280;
+        screenCanvas.height = 720;
+        const ctx = screenCanvas.getContext('2d');
+
+        function drawScreen(elapsedTime) {
+            let bgGrad = ctx.createLinearGradient(0, 0, screenCanvas.width, screenCanvas.height);
+            bgGrad.addColorStop(0, '#010308');
+            bgGrad.addColorStop(1, '#080c16');
+            ctx.fillStyle = bgGrad;
+            ctx.fillRect(0, 0, screenCanvas.width, screenCanvas.height);
+
+            let centerX = screenCanvas.width / 2;
+            let centerY = screenCanvas.height / 2 - 40;
+
+            // Контур смайлика по центру
+            ctx.strokeStyle = '#00f0ff';
+            ctx.fillStyle = '#00f0ff';
+            ctx.shadowColor = '#00f0ff';
+            ctx.shadowBlur = 20;
+            ctx.lineWidth = 8;
+
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Глаза
+            ctx.beginPath();
+            ctx.arc(centerX - 30, centerY - 15, 12, 0, Math.PI * 2);
+            ctx.arc(centerX + 30, centerY - 15, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Улыбка
+            ctx.beginPath();
+            ctx.lineWidth = 8;
+            ctx.lineCap = 'round';
+            ctx.arc(centerX, centerY + 10, 45, 0.1 * Math.PI, 0.9 * Math.PI, false);
+            ctx.stroke();
+
+            // Текст на экране
+            ctx.font = 'bold 55px monospace';
+            ctx.fillStyle = '#00f0ff';
+            ctx.shadowColor = '#00f0ff';
+            ctx.shadowBlur = 20;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('NEOVA_OS v1.0', centerX, centerY + 110);
+
+            let flashAlpha = (Math.sin(elapsedTime * 5) + 1) / 2 * 0.5 + 0.5;
+            ctx.font = 'bold 28px monospace';
+            ctx.fillStyle = `rgba(157, 78, 221, ${flashAlpha})`;
+            ctx.shadowColor = '#9d4edd';
+            ctx.shadowBlur = 15;
+            ctx.fillText('⚡ SYSTEM_TRACKING // ACTIVE', centerX, centerY + 175);
+        }
+
+        const screenTexture = new THREE.CanvasTexture(screenCanvas);
+        const screenMat = new THREE.MeshBasicMaterial({ map: screenTexture });
+        const screenMesh = new THREE.Mesh(screenGeo, screenMat);
+        screenMesh.position.z = 0.1;
+        monitorGroup.add(screenMesh);
+
+        scene.add(monitorGroup);
+
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetRotationX = 0;
+        let targetRotationY = 0;
+
+        window.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = (event.clientY / window.innerHeight) * 2 - 1;
+        });
+
+        window.addEventListener('touchmove', (event) => {
+            if (event.touches.length > 0) {
+                mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
+                mouseY = (event.touches[0].clientY / window.innerHeight) * 2 - 1;
+            }
+        });
+
+        let clock = new THREE.Clock();
 
         function animate() {
             requestAnimationFrame(animate);
-            monitor.rotation.y += 0.005;
-            monitor.rotation.x = Math.sin(Date.now() * 0.001) * 0.1;
+
+            let elapsedTime = clock.getElapsedTime();
+            drawScreen(elapsedTime);
+            screenTexture.needsUpdate = true;
+
+            targetRotationY = mouseX * 0.6; 
+            targetRotationX = mouseY * 0.45; 
+
+            monitorGroup.rotation.y += (targetRotationY - monitorGroup.rotation.y) * 0.07;
+            monitorGroup.rotation.x += (targetRotationX - monitorGroup.rotation.x) * 0.07;
+
+            monitorGroup.position.y = Math.sin(elapsedTime * 2.2) * 0.08;
+
             renderer.render(scene, camera);
         }
         animate();
 
-        window.addEventListener('resize', () => {
+    window.addEventListener('resize', () => {
             camera.aspect = container.clientWidth / container.clientHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(container.clientWidth, container.clientHeight);
