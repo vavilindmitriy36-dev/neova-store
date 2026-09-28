@@ -1,10 +1,11 @@
 :root {
-    --bg-color: #0b0f19;
-    --card-bg: #131c2e;
-    --accent-color: #38bdf8;
-    --text-color: #e2e8f0;
+    --bg-color: #05070f;
+    --card-bg: rgba(13, 20, 38, 0.75);
+    --accent-color: #00f0ff;
+    --accent-purple: #9d4edd;
+    --text-color: #f1f5f9;
     --text-muted: #94a3b8;
-    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color: rgba(0, 240, 255, 0.15);
 }
 
 * {
@@ -15,6 +16,10 @@
 
 body {
     background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(157, 78, 221, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.12) 0%, transparent 40%),
+        linear-gradient(to bottom, #05070f, #0b0f19);
     color: var(--text-color);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     min-height: 100vh;
@@ -22,26 +27,27 @@ body {
     flex-direction: column;
 }
 
-/* Компактная и аккуратная шапка */
+/* Компактная шапка */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 20px;
     border-bottom: 1px solid var(--border-color);
-    background: rgba(11, 15, 25, 0.95);
-    backdrop-filter: blur(10px);
+    background: rgba(5, 7, 15, 0.85);
+    backdrop-filter: blur(12px);
     position: sticky;
     top: 0;
     z-index: 100;
 }
 
 .logo {
-    font-weight: 700;
-    font-size: 1.1rem;
-    letter-spacing: 2px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    letter-spacing: 3px;
     color: var(--accent-color);
     text-decoration: none;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
 }
 
 nav {
@@ -62,7 +68,7 @@ nav a:hover, nav a.active {
 
 .user-nav {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 
 .user-nav a {
@@ -71,7 +77,7 @@ nav a:hover, nav a.active {
     font-size: 0.95rem;
 }
 
-/* Главный блок (Hero) */
+/* Главный блок */
 .hero {
     display: flex;
     flex-direction: column;
@@ -85,13 +91,14 @@ nav a:hover, nav a.active {
 }
 
 .hero-text h1 {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     margin-bottom: 12px;
     line-height: 1.2;
 }
 
 .hero-text h1 span {
     color: var(--accent-color);
+    text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
 }
 
 .hero-text p {
@@ -114,73 +121,48 @@ nav a:hover, nav a.active {
     display: inline-block;
     padding: 10px 20px;
     background: var(--accent-color);
-    color: #0b0f19;
-    font-weight: 600;
+    color: #05070f;
+    font-weight: 700;
     font-size: 0.9rem;
     border-radius: 8px;
     text-decoration: none;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
 }
 
 .btn-secondary {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.05);
     color: var(--text-color);
     border: 1px solid var(--border-color);
+    box-shadow: none;
 }
 
-/* Монитор с глитчем */
+/* Контейнер для настоящего 3D-канваса с монитором */
 .monitor-container {
-    perspective: 1000px;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.monitor {
-    width: 100%;
-    max-width: 340px;
-    height: 190px;
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border: 3px solid rgba(56, 189, 248, 0.3);
-    border-radius: 14px;
+    max-width: 380px;
+    height: 230px;
     position: relative;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6), 0 0 20px rgba(56, 189, 248, 0.15);
     display: flex;
-    align-items: center;
     justify-content: center;
-    overflow: hidden;
-    animation: float 4s ease-in-out infinite;
+    align-items: center;
+    margin: 0 auto;
 }
 
-.screen-content {
-    font-family: monospace;
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: var(--accent-color);
-    text-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
-    animation: screenGlitch 3s infinite;
+#canvas-3d {
+    width: 100%;
+    height: 100%;
+    display: block;
+    outline: none;
 }
 
-@keyframes screenGlitch {
-    0%, 100% { opacity: 1; transform: translate(0); }
-    92% { opacity: 1; transform: translate(0); }
-    93% { opacity: 0.3; transform: translate(-2px, 1px); }
-    94% { opacity: 0.9; transform: translate(2px, -1px); }
-    96% { opacity: 1; transform: translate(0); }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotateX(2deg) rotateY(-2deg); }
-    50% { transform: translateY(-6px) rotateX(5deg) rotateY(-5deg); }
-}
-
-/* Секция с товарами (как на видео) */
+/* Секция с товарами */
 .section-title {
     max-width: 1200px;
-    margin: 30px auto 15px;
+    margin: 35px auto 15px;
     padding: 0 20px;
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
 .products-grid {
@@ -197,45 +179,61 @@ nav a:hover, nav a.active {
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 14px;
-    padding: 15px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     position: relative;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
 .badge-sale {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 10px;
+    left: 10px;
     background: #ef4444;
     color: white;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     padding: 3px 6px;
     border-radius: 4px;
-    font-weight: 600;
+    font-weight: 700;
+    z-index: 2;
 }
 
-.product-img {
-    height: 110px;
+.product-img-container {
+    width: 100%;
+    height: 120px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    color: var(--text-muted);
     margin-bottom: 10px;
 }
 
+.product-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.product-card:hover img {
+    transform: scale(1.05);
+}
+
 .product-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 4px;
     color: var(--text-color);
 }
 
 .product-specs {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     color: var(--text-muted);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .product-footer {
@@ -246,17 +244,17 @@ nav a:hover, nav a.active {
 }
 
 .price {
-    font-weight: 700;
-    font-size: 0.95rem;
+    font-weight: 800;
+    font-size: 0.9rem;
     color: var(--accent-color);
 }
 
 .cart-btn {
-    background: rgba(56, 189, 248, 0.15);
-    border: none;
+    background: rgba(0, 240, 255, 0.15);
+    border: 1px solid rgba(0, 240, 255, 0.3);
     color: var(--accent-color);
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -272,9 +270,10 @@ footer {
     color: var(--text-muted);
     font-size: 0.8rem;
     margin-top: auto;
+    background: rgba(5, 7, 15, 0.5);
 }
 
-/* На ПК делаем сетку товаров пошире */
+/* Адаптивность для ПК */
 @media (min-width: 768px) {
     .products-grid {
         grid-template-columns: repeat(4, 1fr);
@@ -294,6 +293,7 @@ footer {
         justify-content: flex-start;
     }
     .monitor-container {
-        width: auto;
+        max-width: 450px;
+        height: 280px;
     }
 }
