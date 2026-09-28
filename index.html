@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOVA — Интернет-магазин техники</title>
-    <link rel="stylesheet" href="style.css?v=14">
+    <link rel="stylesheet" href="style.css?v=15">
 </head>
 <body>
 
@@ -74,7 +74,7 @@
     <!-- Главный экран -->
     <main>
         <section class="hero">
-            <!-- CSS-класс cyber-display-card был УДАЛЕН отсюда -->
+            <!-- Контейнер главного баннера (рамка удалена) -->
             <div class="hero-display-container">
                 <div class="monitor-container">
                     <canvas id="canvas-3d"></canvas>
@@ -261,7 +261,7 @@
                 ctx.moveTo(-25, 20); ctx.lineTo(25, 20);
                 ctx.stroke();
             },
-            // 2: Подмигивающий (один глаз звездочкой/точкой, другой линией)
+            // 2: Подмигивающий
             (ctx, elapsedTime) => {
                 ctx.beginPath();
                 ctx.arc(-30, -15, 12, 0, Math.PI * 2);
@@ -283,7 +283,7 @@
                 ctx.arc(10, 35, 14, 0, Math.PI, false);
                 ctx.fill();
             },
-            // 3: С сердечком вместо глаз
+            // 3: С сердечками вместо глаз
             (ctx, elapsedTime) => {
                 ctx.font = '35px sans-serif';
                 ctx.textAlign = 'center';
@@ -301,7 +301,6 @@
         ];
 
         function drawGlitchSmile(elapsedTime) {
-            // Темный фон
             let bgGrad = ctx.createLinearGradient(0, 0, screenCanvas.width, screenCanvas.height);
             bgGrad.addColorStop(0, '#010308');
             bgGrad.addColorStop(1, '#080c16');
@@ -311,18 +310,15 @@
             let centerX = screenCanvas.width / 2;
             let centerY = screenCanvas.height / 2 - 40;
 
-            // Рандомный глитч-сдвиг каждые несколько секунд
             let isGlitching = Math.sin(elapsedTime * 6) > 0.85;
             let glitchOffsetX = isGlitching ? (Math.random() * 16 - 8) : 0;
             let glitchOffsetY = isGlitching ? (Math.random() * 8 - 4) : 0;
 
-            // Выбор текущей эмоции в зависимости от времени (меняется каждые ~3.5 секунды)
             let faceIndex = Math.floor(elapsedTime / 3.5) % glitchFaces.length;
 
             ctx.save();
             ctx.translate(centerX + glitchOffsetX, centerY + glitchOffsetY);
 
-            // Функция отрисовки смайлика (для создания хроматической аберрации)
             function renderFaceLayer(color, shadowColor, blur) {
                 ctx.strokeStyle = color;
                 ctx.fillStyle = color;
@@ -330,16 +326,13 @@
                 ctx.shadowBlur = blur;
                 ctx.lineWidth = 8;
 
-                // Голова (круг)
                 ctx.beginPath();
                 ctx.arc(0, 0, 80, 0, Math.PI * 2);
                 ctx.stroke();
 
-                // Рендерим текущую выбранную эмоцию из массива
                 glitchFaces[faceIndex](ctx, elapsedTime);
             }
 
-            // Рендерим слои с эффектом глитча (красный и синий сдвиги по бокам)
             if (isGlitching) {
                 ctx.save();
                 ctx.translate(-6, 0);
@@ -352,12 +345,10 @@
                 ctx.restore();
             }
 
-            // Основной смайлик
             renderFaceLayer('#00f0ff', '#00f0ff', 25);
 
             ctx.restore();
 
-            // Рандомные горизонтальные глитч-полосы на экране
             if (isGlitching) {
                 ctx.fillStyle = 'rgba(255, 0, 85, 0.3)';
                 let stripeY = Math.random() * screenCanvas.height;
@@ -368,7 +359,6 @@
                 ctx.fillRect(0, stripeY2, screenCanvas.width, Math.random() * 15 + 2);
             }
 
-            // Текст ОС
             ctx.font = 'bold 55px monospace';
             ctx.fillStyle = '#00f0ff';
             ctx.shadowColor = '#00f0ff';
@@ -377,7 +367,6 @@
             ctx.textBaseline = 'middle';
             ctx.fillText('NEOVA_OS v1.0', centerX, centerY + 110);
 
-            // Статус
             let flashAlpha = (Math.sin(elapsedTime * 5) + 1) / 2 * 0.5 + 0.5;
             ctx.font = 'bold 28px monospace';
             ctx.fillStyle = `rgba(157, 78, 221, ${flashAlpha})`;
