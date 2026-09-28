@@ -1,165 +1,190 @@
-/* =========================================
-   СТИЛИ КАТАЛОГА И ФИЛЬТРОВ (ИСПРАВЛЕНО)
-   ========================================= */
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEOVA // Каталог</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-.catalog-main {
-    padding: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
+    <!-- Шапка сайта -->
+    <header>
+        <div class="header-left">
+            <button class="menu-btn" id="menuToggle">☰</button>
+            <a href="index.html" class="cyber-logo-link">
+                <div class="cyber-logo-container" id="logoSticker" title="Кликни меня!">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                        <polyline points="2 17 12 22 22 17"></polyline>
+                        <polyline points="2 12 12 17 22 12"></polyline>
+                    </svg>
+                </div>
+                <span class="cyber-logo-text">NEOVA</span>
+            </a>
+        </div>
+        
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" placeholder="Поиск устройств...">
+        </div>
 
-.catalog-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
+        <div class="user-nav">
+            <a href="catalog.html">🛒</a>
+            <a href="#">👤</a>
+        </div>
+    </header>
 
-.page-title {
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0;
-}
+    <!-- Выдвижное боковое меню -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="logo">НАВИГАЦИЯ</span>
+            <button class="close-btn" id="sidebarClose">&times;</button>
+        </div>
+        <div class="sidebar-nav">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог товаров</a>
+            <a href="#">Кибер-устройства</a>
+            <a href="#">Контакты</a>
+        </div>
+    </div>
+    <div class="overlay" id="overlay"></div>
 
-.sort-container {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
+    <!-- Основной контент каталога -->
+    <main class="catalog-main">
+        <div class="catalog-top-bar">
+            <h1 class="page-title">Каталог устройств</h1>
+            <div class="sort-container">
+                <button class="filter-btn-mobile" id="mobileFilterToggle">⚙ Фильтры</button>
+                <select class="sort-select">
+                    <option>По популярности</option>
+                    <option>Сначала дешевле</option>
+                    <option>Сначала дороже</option>
+                </select>
+            </div>
+        </div>
 
-.sort-select {
-    background: #121824;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 12px;
-    border-radius: 10px;
-    outline: none;
-    cursor: pointer;
-}
+        <div class="catalog-layout">
+            <!-- Сайдбар с фильтрами -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+                <div class="filter-header-mobile">
+                    <span class="filter-title" style="font-size: 18px;">Фильтры</span>
+                    <button class="close-btn" id="filtersClose">&times;</button>
+                </div>
 
-.filter-btn-mobile {
-    background: #00f0ff;
-    color: #05070b;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    display: none; /* По умолчанию на десктопе скрыта */
-}
+                <div class="filter-group">
+                    <div class="filter-title">Категории</div>
+                    <label class="custom-checkbox"><input type="checkbox" checked> Нейроинтерфейсы</label>
+                    <label class="custom-checkbox"><input type="checkbox"> Квантовые дисплеи</label>
+                    <label class="custom-checkbox"><input type="checkbox"> Кибернетика</label>
+                </div>
 
-.catalog-layout {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 25px;
-    align-items: start;
-}
+                <div class="filter-group">
+                    <div class="filter-title">Цена (₽)</div>
+                    <div class="price-inputs">
+                        <input type="number" placeholder="От" value="0">
+                        <input type="number" placeholder="До" value="150000">
+                    </div>
+                </div>
 
-/* Сайдбар фильтров */
-.filters-sidebar {
-    background: #0b111e;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 20px;
-}
+                <button class="apply-filters-btn">Применить</button>
+            </aside>
 
-.filter-header-mobile {
-    display: none; /* Видно только на мобилках внутри панели */
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
+            <!-- Сетка товаров -->
+            <div class="products-grid">
+                <div class="product-card">
+                    <span class="badge-sale">SALE</span>
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=500&q=80" alt="Neuralink X">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Neuralink X-Core</div>
+                        <div class="product-specs">Нейроинтерфейс связи</div>
+                        <div class="product-footer">
+                            <span class="price">45 990 ₽</span>
+                            <button class="cart-btn">+</button>
+                        </div>
+                    </div>
+                </div>
 
-.filter-group {
-    margin-bottom: 20px;
-}
+                <div class="product-card">
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=500&q=80" alt="Cyber Deck">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Quantum Deck V2</div>
+                        <div class="product-specs">Портативный терминал</div>
+                        <div class="product-footer">
+                            <span class="price">89 000 ₽</span>
+                            <button class="cart-btn">+</button>
+                        </div>
+                    </div>
+                </div>
 
-.filter-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #f8fafc;
-}
+                <div class="product-card">
+                    <span class="badge-sale">NEW</span>
+                    <div class="product-img-container">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=500&q=80" alt="Processor">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-title">Synapse CPU-9</div>
+                        <div class="product-specs">Квантовый процессор</div>
+                        <div class="product-footer">
+                            <span class="price">125 500 ₽</span>
+                            <button class="cart-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 
-.custom-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: #94a3b8;
-    margin-bottom: 8px;
-    cursor: pointer;
-}
+    <footer>
+        <p>&copy; 2026 NEOVA Cybernetics. Все права защищены.</p>
+    </footer>
 
-.custom-checkbox input {
-    accent-color: #00f0ff;
-}
+    <script>
+        // Меню сайта
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarClose = document.getElementById('sidebarClose');
+        const overlay = document.getElementById('overlay');
 
-.price-inputs {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
 
-.price-inputs input {
-    width: 100%;
-    background: #121824;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 13px;
-    outline: none;
-}
+        menuToggle.addEventListener('click', toggleMenu);
+        sidebarClose.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
 
-.apply-filters-btn {
-    width: 100%;
-    background: #00f0ff;
-    color: #05070b;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s;
-}
+        // Мобильные фильтры
+        const mobileFilterToggle = document.getElementById('mobileFilterToggle');
+        const filtersSidebar = document.getElementById('filtersSidebar');
+        const filtersClose = document.getElementById('filtersClose');
 
-.apply-filters-btn:hover {
-    opacity: 0.9;
-}
+        function toggleFilters() {
+            filtersSidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
 
-/* Адаптивность для мобильных устройств (чтобы фильтры выезжали и не ломали сетку) */
-@media (max-width: 768px) {
-    .filter-btn-mobile {
-        display: block;
-    }
+        mobileFilterToggle.addEventListener('click', toggleFilters);
+        filtersClose.addEventListener('click', toggleFilters);
+        
+        // Клик по оверлею закрывает и меню, и фильтры
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            filtersSidebar.classList.remove('active');
+            overlay.classList.remove('active');
+        });
 
-    .catalog-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .filters-sidebar {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 280px;
-        height: 100%;
-        background: #090d16;
-        z-index: 2000;
-        transition: 0.3s ease;
-        overflow-y: auto;
-        border-radius: 0;
-        border-right: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-    }
-
-    .filters-sidebar.active {
-        left: 0;
-    }
-
-    .filter-header-mobile {
-        display: flex;
-    }
-}
+        // Логотип
+        const sticker = document.getElementById('logoSticker');
+        sticker.addEventListener('click', () => {
+            sticker.classList.add('glitch-active');
+            setTimeout(() => sticker.classList.remove('glitch-active'), 250);
+        });
+    </script>
+</body>
+</html>
