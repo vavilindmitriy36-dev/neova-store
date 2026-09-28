@@ -1,5 +1,5 @@
 /* =========================================
-   ОСНОВНЫЕ СТИЛИ СТРАНИЦЫ
+   ОСНОВНЫЕ СТИЛИ И ПЕРЕМЕННЫЕ
    ========================================= */
 body {
     background-color: #05070b;
@@ -10,7 +10,9 @@ body {
     overflow-x: hidden;
 }
 
-/* Шапка */
+/* =========================================
+   ШАПКА САЙТА (HEADER)
+   ========================================= */
 header {
     display: flex;
     justify-content: space-between;
@@ -38,32 +40,17 @@ header {
     cursor: pointer;
 }
 
-/* --- АНИМИРОВАННЫЙ RGB ЛОГОТИП И СТИКЕР --- */
-@keyframes rgbTextCycle {
-    0% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
-    33% { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
-    66% { color: #9d4edd; text-shadow: 0 0 10px rgba(157, 78, 221, 0.4); }
-    100% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
-}
-
-.cyber-logo-text {
-    font-weight: 800;
-    font-size: 20px;
-    text-decoration: none;
-    letter-spacing: 1px;
-    animation: rgbTextCycle 8s infinite linear;
-}
-
+/* Логотип и анимированный стикер */
 .cyber-logo-link {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     text-decoration: none;
 }
 
 .cyber-logo-container {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     cursor: pointer;
     position: relative;
     animation: rgbTextCycle 8s infinite linear;
@@ -90,7 +77,21 @@ header {
     100% { transform: translate(0) skew(0deg); }
 }
 
-/* Поиск */
+@keyframes rgbTextCycle {
+    0% { color: #ff0055; }
+    33% { color: #00f0ff; }
+    66% { color: #9d4edd; }
+    100% { color: #ff0055; }
+}
+
+.cyber-logo-text {
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: 1px;
+    animation: rgbTextCycle 8s infinite linear;
+}
+
+/* Поиск в шапке */
 .search-bar {
     display: flex;
     align-items: center;
@@ -127,7 +128,9 @@ header {
     text-decoration: none;
 }
 
-/* Боковое меню */
+/* =========================================
+   БОКОВОЕ ВЫДВИЖНОЕ МЕНЮ (SIDEBAR)
+   ========================================= */
 .sidebar {
     position: fixed;
     top: 0;
@@ -196,20 +199,26 @@ header {
     display: block;
 }
 
-/* Главный баннер */
+/* =========================================
+   ГЛАВНЫЙ ЭКРАН И 3D КОНТЕЙНЕР
+   ========================================= */
+.hero {
+    padding: 0 20px;
+}
+
 .hero-display-container {
     position: relative;
-    margin: 20px;
+    margin-top: 20px;
     background: #090e1a;
     border-radius: 28px;
-    padding: 15px;
+    padding: 10px;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .monitor-container {
     width: 100%;
-    height: 340px;
-    margin-top: 25px;
+    height: 380px;
     position: relative;
 }
 
@@ -219,180 +228,63 @@ header {
     display: block;
 }
 
-/* Каталог и фильтры */
-.catalog-main {
-    padding: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.catalog-top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.page-title {
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0;
-}
-
-.sort-container {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.sort-select {
-    background: #121824;
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px 12px;
-    border-radius: 10px;
-    outline: none;
-    cursor: pointer;
-}
-
-.filter-btn-mobile {
-    background: #00f0ff;
-    color: #05070b;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    display: none;
-}
-
-.catalog-layout {
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 25px;
-    align-items: start;
-}
-
-.filters-sidebar {
-    background: #0b111e;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 20px;
-}
-
-.filter-header-mobile {
-    display: none;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.filter-group {
-    margin-bottom: 20px;
-}
-
-.filter-title {
-    font-size: 15px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #f8fafc;
-}
-
-.custom-checkbox {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: #94a3b8;
-    margin-bottom: 8px;
-    cursor: pointer;
-}
-
-.custom-checkbox input {
-    accent-color: #00f0ff;
-}
-
-.price-inputs {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.price-inputs input {
-    width: 100%;
-    background: #121824;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 8px;
-    border-radius: 8px;
-    color: #fff;
-    font-size: 13px;
-    outline: none;
-}
-
-.apply-filters-btn {
-    width: 100%;
-    background: #00f0ff;
-    color: #05070b;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.apply-filters-btn:hover {
-    opacity: 0.9;
-}
-
-/* Сетка товаров */
+/* =========================================
+   КАТАЛОГ И СЕТКА ТОВАРОВ
+   ========================================= */
 .section-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
-    margin: 25px 20px 15px 20px;
+    margin: 30px 20px 15px 20px;
+    color: #f8fafc;
 }
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 0 20px;
 }
 
 .product-card {
     background: #0b111e;
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 20px;
-    padding: 12px;
+    padding: 15px;
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0, 240, 255, 0.3);
 }
 
 .badge-sale {
     position: absolute;
-    top: 12px;
-    left: 12px;
+    top: 15px;
+    left: 15px;
     background: #ff3366;
     color: white;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: 700;
-    padding: 3px 8px;
+    padding: 4px 8px;
     border-radius: 6px;
     z-index: 2;
 }
 
 .product-img-container {
     width: 100%;
-    height: 150px;
+    height: 180px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     overflow: hidden;
     border-radius: 12px;
+    background: #121824;
 }
 
 .product-img-container img {
@@ -403,7 +295,7 @@ header {
 }
 
 .product-title {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     margin-bottom: 4px;
     color: #f8fafc;
@@ -412,7 +304,7 @@ header {
 .product-specs {
     font-size: 12px;
     color: #64748b;
-    margin-bottom: 12px;
+    margin-bottom: 15px;
 }
 
 .product-footer {
@@ -422,7 +314,7 @@ header {
 }
 
 .price {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: #fff;
 }
@@ -431,8 +323,8 @@ header {
     background: #00f0ff;
     color: #05070b;
     border: none;
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -440,59 +332,44 @@ header {
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
+    transition: opacity 0.2s;
 }
 
+.cart-btn:hover {
+    opacity: 0.85;
+}
+
+/* =========================================
+   ПОДВАЛ (FOOTER)
+   ========================================= */
 footer {
     text-align: center;
-    padding: 20px;
+    padding: 25px;
     color: #475569;
     font-size: 12px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 50px;
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
-    .filter-btn-mobile {
-        display: block;
-    }
-
-    .catalog-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .filters-sidebar {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 280px;
-        height: 100%;
-        background: #090d16;
-        z-index: 2000;
-        transition: 0.3s ease;
-        overflow-y: auto;
-        border-radius: 0;
-        border-right: 1px solid rgba(255, 255, 255, 0.08);
-        box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-        padding: 20px;
-    }
-
-    .filters-sidebar.active {
-        left: 0;
-    }
-
-    .filter-header-mobile {
-        display: flex;
-    }
-
+/* =========================================
+   АДАПТИВНОСТЬ (МОБИЛЬНЫЕ УСТРОЙСТВА)
+   ========================================= */
+@media (max-width: 1024px) {
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
     .products-grid {
         grid-template-columns: 1fr;
+    }
+    
+    .search-bar {
+        display: none; /* Скрываем поиск на маленьких экранах или выносим по желанию */
+    }
+
+    .monitor-container {
+        height: 280px;
     }
 }
