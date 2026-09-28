@@ -4,19 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOVA — Избранное</title>
-    <link rel="stylesheet" href="style.css?v=20">
+    <link rel="stylesheet" href="style.css?v=21">
     <style>
         .content-container {
             max-width: 1200px;
             margin: 30px auto;
             padding: 0 20px;
         }
+        .page-header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
         .page-header-title {
             font-size: 26px;
             font-weight: 800;
-            margin-bottom: 25px;
             color: #fff;
             letter-spacing: 0.5px;
+            margin: 0;
+        }
+        .clear-wishlist-btn {
+            background: transparent;
+            border: 1px solid rgba(255, 51, 102, 0.3);
+            color: #ff3366;
+            padding: 8px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .clear-wishlist-btn:hover {
+            background: rgba(255, 51, 102, 0.1);
+            border-color: #ff3366;
+        }
+        /* Кнопка удаления товара из избранного прямо на карточке */
+        .remove-wishlist-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(11, 17, 30, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ff3366;
+            width: 32px;
+            height: 32px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 2;
+            transition: 0.2s;
+        }
+        .remove-wishlist-btn:hover {
+            background: #ff3366;
+            color: #fff;
+            border-color: #ff3366;
+        }
+        .empty-wishlist {
+            text-align: center;
+            padding: 60px 20px;
+            color: #64748b;
+            font-size: 16px;
+            display: none;
+        }
+        .empty-wishlist.active {
+            display: block;
         }
     </style>
 </head>
@@ -86,11 +141,17 @@
 
     <!-- Основной контент -->
     <main class="content-container">
-        <h1 class="page-header-title">Избранные товары</h1>
+        <div class="page-header-container">
+            <h1 class="page-header-title">Избранные товары</h1>
+            <button class="clear-wishlist-btn" id="clearAllBtn" onclick="clearWishlist()">Очистить список</button>
+        </div>
         
-        <!-- Сетка товаров (например, пара отложенных позиций) -->
-        <div class="products-grid" style="padding: 0;">
-            <div class="product-card">
+        <!-- Сетка избранных товаров -->
+        <div class="products-grid" id="wishlistGrid" style="padding: 0;">
+            
+            <!-- Товар 1 -->
+            <div class="product-card" id="item-1">
+                <button class="remove-wishlist-btn" onclick="removeItem('item-1')" title="Удалить из избранного">✕</button>
                 <div class="badge-sale">-11%</div>
                 <div class="product-img-container">
                     <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=500&q=80" alt="NVIDIA GeForce RTX 4070">
@@ -99,11 +160,13 @@
                 <div class="product-specs">12 GB GDDR6X • PCIe 4.0</div>
                 <div class="product-footer">
                     <span class="price">389 990 ₸</span>
-                    <button class="cart-btn">🛒</button>
+                    <button class="cart-btn" title="Добавить в корзину">🛒</button>
                 </div>
             </div>
 
-            <div class="product-card">
+            <!-- Товар 2 -->
+            <div class="product-card" id="item-2">
+                <button class="remove-wishlist-btn" onclick="removeItem('item-2')" title="Удалить из избранного">✕</button>
                 <div class="product-img-container">
                     <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=500&q=80" alt="AMD Ryzen 7 7800X3D">
                 </div>
@@ -111,9 +174,15 @@
                 <div class="product-specs">8 ядер / 16 потоков • AM5</div>
                 <div class="product-footer">
                     <span class="price">189 990 ₸</span>
-                    <button class="cart-btn">🛒</button>
+                    <button class="cart-btn" title="Добавить в корзину">🛒</button>
                 </div>
             </div>
+
+        </div>
+
+        <!-- Сообщение, если список пуст -->
+        <div class="empty-wishlist" id="emptyMessage">
+            В вашем списке избранного пока ничего нет. Исследуйте каталог и добавляйте передовую технику!
         </div>
     </main>
 
@@ -127,6 +196,35 @@
             document.getElementById('overlay').classList.toggle('active');
         }
 
+        // Удаление конкретного товара
+        function removeItem(itemId) {
+            const card = document.getElementById(itemId);
+            if (card) {
+                card.remove();
+                checkEmptyState();
+            }
+        }
+
+        // Полная очистка избранного
+        function clearWishlist() {
+            const grid = document.getElementById('wishlistGrid');
+            grid.innerHTML = '';
+            checkEmptyState();
+        }
+
+        // Проверка: если карточек не осталось, показываем заглушку и скрываем кнопку очистки
+        function checkEmptyState() {
+            const grid = document.getElementById('wishlistGrid');
+            const emptyMsg = document.getElementById('emptyMessage');
+            const clearBtn = document.getElementById('clearAllBtn');
+
+            if (grid.children.length === 0) {
+                emptyMsg.classList.add('active');
+                if (clearBtn) clearBtn.style.display = 'none';
+            }
+        }
+
+        // Анимация лиц логотипа
         const faces = [
             { eyes: '<circle cx="8.5" cy="9.5" r="1.5"/><circle cx="15.5" cy="9.5" r="1.5"/>', mouth: 'M 8 14 Q 12 18 16 14' }, 
             { eyes: '<path d="M 7 9 L 10 11 M 7 11 L 10 9" stroke="currentColor" stroke-width="1.5"/><path d="M 14 9 L 17 11 M 14 11 L 17 9" stroke="currentColor" stroke-width="1.5"/>', mouth: 'M 8 15 L 16 15' }, 
@@ -146,4 +244,3 @@
     </script>
 </body>
 </html>
-
