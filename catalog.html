@@ -1,1 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог — NEOVA</title>
+    <link rel="stylesheet" href="style.css?v=13">
+</head>
+<body>
+
+    <!-- Затемнение фона при открытии меню -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- Выдвижное боковое меню слева -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="logo">NEOVA</span>
+            <button class="close-btn" onclick="toggleMenu()">&times;</button>
+        </div>
+        <div class="sidebar-nav">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html" style="color: #00f0ff;">Каталог товаров</a>
+            <a href="delivery.html">Доставка и оплата</a>
+            <a href="wishlist.html">Избранное</a>
+            <a href="profile.html">Личный кабинет</a>
+        </div>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header>
+        <div class="header-left">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="logo">NEOVA</a>
+        </div>
+        
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" placeholder="Поиск в каталоге...">
+        </div>
+
+        <div class="user-nav">
+            <a href="wishlist.html" title="Избранное">🤍</a>
+            <a href="cart.html" title="Корзина">🛒</a>
+            <a href="profile.html" title="Профиль">👤</a>
+        </div>
+    </header>
+
+    <main class="catalog-main">
+        
+        <!-- Заголовок и сортировка -->
+        <div class="catalog-top-bar">
+            <h1 class="page-title">Каталог техники</h1>
+            <div class="sort-container">
+                <select class="sort-select">
+                    <option>По популярности</option>
+                    <option>Сначала дешевые</option>
+                    <option>Сначала дорогие</option>
+                    <option>Новинки</option>
+                </select>
+                <!-- Кнопка фильтров для мобилок -->
+                <button class="filter-btn-mobile" onclick="toggleFilters()">🎛 Фильтры</button>
+            </div>
+        </div>
+
+        <div class="catalog-layout">
+            <!-- Боковая панель фильтров -->
+            <aside class="filters-sidebar" id="filtersSidebar">
+                <div class="filter-header-mobile">
+                    <h3>Фильтры</h3>
+                    <button class="close-btn" onclick="toggleFilters()">&times;</button>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Категории</h4>
+                    <label class="custom-checkbox"><input type="checkbox" checked> Комплектующие <span class="checkmark"></span></label>
+                    <label class="custom-checkbox"><input type="checkbox" checked> Периферия <span class="checkmark"></span></label>
+                    <label class="custom-checkbox"><input type="checkbox"> Ноутбуки <span class="checkmark"></span></label>
+                    <label class="custom-checkbox"><input type="checkbox"> Смартфоны <span class="checkmark"></span></label>
+                    <label class="custom-checkbox"><input type="checkbox"> Мониторы <span class="checkmark"></span></label>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Цена (₸)</h4>
+                    <div class="price-inputs">
+                        <input type="number" placeholder="От 10 000">
+                        <span>-</span>
+                        <input type="number" placeholder="До 1 500 000">
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4 class="filter-title">Бренды</h4>
+                    <label class="custom-checkbox"><input type="checkbox"> NVIDIA <span class="checkmark"></span></label>
+                    <label class="custom-checkbox"><input type="checkbox"> AMD <span class="checkmark"></span></label>
+                    <label class="custom-checkbox"><input type="checkbox"> ASUS <span class="checkmark"></span></label>
+                    <label class="custom-checkbox"><input type="checkbox"> Razer <span class="checkmark"></span></label>
+                    <label class="custom-checkbox"><input type="checkbox"> Apple <span class="checkmark"></span></label>
+                </div>
+
+                <button class="apply-filters-btn">Применить</button>
+            </aside>
+
+            <!-- Сетка товаров (расширенная) -->
+            <div class="catalog-content">
+                <div class="products-grid catalog-grid">
+                    
+                    <!-- 1 -->
+                    <div class="product-card">
+                        <div class="badge-sale">-11%</div>
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=500&q=80" alt="RTX 4070">
+                        </div>
+                        <div class="product-title">NVIDIA GeForce RTX 4070</div>
+                        <div class="product-specs">12 GB GDDR6X • PCIe 4.0</div>
+                        <div class="product-footer">
+                            <span class="price">389 990 ₸</span>
+                            <button class="cart-btn">🛒</button>
+                        </div>
+                    </div>
+
+                    <!-- 2 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=500&q=80" alt="Ryzen 7">
+                        </div>
+                        <div class="product-title">AMD Ryzen 7 7800X3D</div>
+                        <div class="product-specs">8 ядер / 16 потоков • AM5</div>
+                        <div class="product-footer">
+                            <span class="price">189 990 ₸</span>
+                            <button class="cart-btn">🛒</button>
+                        </div>
+                    </div>
+
+                    <!-- 3 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="Monitor">
+                        </div>
+                        <div class="product-title">NEOVA Display 27" 240Hz</div>
+                        <div class="product-specs">2560x1440 • IPS • 1ms</div>
+                        <div class="product-footer">
+                            <span class="price">149 990 ₸</span>
+                            <button class="cart-btn">🛒</button>
+                        </div>
+                    </div>
+
+                    <!-- 4 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=80" alt="Laptop">
+                        </div>
+                        <div class="product-title">ASUS ROG Strix G16</div>
+                        <div class="product-specs">i7-13650HX • RTX 4060</div>
+                        <div class="product-footer">
+                            <span class="price">799 990 ₸</span>
+                            <button class="cart-btn">🛒</button>
+                        </div>
+                    </div>
+
+                    <!-- 5 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=500&q=80" alt="Keyboard">
+                        </div>
+                        <div class="product-title">NEOVA Mech-Key V2</div>
+                        <div class="product-specs">Механика • RGB • Red Switches</div>
+                        <div class="product-footer">
+                            <span class="price">39 990 ₸</span>
+                            <button class="cart-btn">🛒</button>
+                        </div>
+                    </div>
+
+                    <!-- 6 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1615663245857-ac1eeb536628?auto=format&fit=crop&w=500&q=80" alt="Mouse">
+                        </div>
+                        <div class="product-title">Razer DeathAdder V3 Pro</div>
+                        <div class="product-specs">Беспроводная • 30K DPI</div>
+                        <div class="product-footer">
+                            <span class="price">74 990 ₸</span>
+                            <button class="cart-btn">🛒</button>
+                        </div>
+                    </div>
+
+                    <!-- 7 -->
+                    <div class="product-card">
+                        <div class="badge-sale">-20%</div>
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=500&q=80" alt="Headset">
+                        </div>
+                        <div class="product-title">NEOVA Audio 7.1 Wireless</div>
+                        <div class="product-specs">Bluetooth 5.3 • ANC</div>
+                        <div class="product-footer">
+                            <span class="price">47 990 ₸</span>
+                            <button class="cart-btn">🛒</button>
+                        </div>
+                    </div>
+
+                    <!-- 8 -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="Smartphone">
+                        </div>
+                        <div class="product-title">NEOVA Smartphone Pro</div>
+                        <div class="product-specs">6.7" AMOLED • 256 GB</div>
+                        <div class="product-footer">
+                            <span class="price">279 990 ₸</span>
+                            <button class="cart-btn">🛒</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Пагинация (номера страниц) -->
+                <div class="pagination">
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <span style="color: #64748b; align-self: center;">...</span>
+                    <button class="page-btn">12</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2026 NEOVA. Все права защищены.</p>
+    </footer>
+
+    <!-- Скрипты -->
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        function toggleFilters() {
+            document.getElementById('filtersSidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
 
