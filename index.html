@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOVA — Интернет-магазин техники</title>
-    <link rel="stylesheet" href="style.css?v=11">
+    <link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 
@@ -46,7 +46,7 @@
         </div>
     </header>
 
-    <!-- Главный экран с RGB рамкой -->
+    <!-- Главный экран -->
     <main>
         <section class="hero">
             <div class="cyber-display-card">
@@ -143,17 +143,21 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Чистое студийное освещение
+        // Студийное освещение
         const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         scene.add(ambientLight);
 
-        const frontLight = new THREE.PointLight(0xffffff, 4, 30);
-        frontLight.position.set(0, 1, 4);
-        scene.add(frontLight);
+        const cyanLight = new THREE.PointLight(0x00f0ff, 6, 50);
+        cyanLight.position.set(-3, 2, 4);
+        scene.add(cyanLight);
+
+        const purpleLight = new THREE.PointLight(0x9d4edd, 5, 50);
+        purpleLight.position.set(3, -2, 4);
+        scene.add(purpleLight);
 
         const monitorGroup = new THREE.Group();
 
-        // 1. Задняя крышка монитора
+        // 1. Задняя крышка
         const backGeo = new THREE.BoxGeometry(4.4, 2.5, 0.15);
         const backMat = new THREE.MeshStandardMaterial({ color: 0x070b14, metalness: 0.9, roughness: 0.2 });
         const backCover = new THREE.Mesh(backGeo, backMat);
@@ -190,7 +194,7 @@
             ctx.textBaseline = 'middle';
             ctx.fillText('NEOVA_OS v1.0', screenCanvas.width / 2, screenCanvas.height / 2 - 30);
 
-            // Мигающая статус-надпись
+            // Мигающая интерактивная статус-надпись
             ctx.font = 'bold 32px monospace';
             ctx.fillStyle = `rgba(157, 78, 221, ${flashAlpha})`;
             ctx.shadowColor = '#9d4edd';
@@ -205,9 +209,9 @@
         monitorGroup.add(screenMesh);
 
         // 4. Подставка
-        const armGeo = new !== undefined ? new THREE.CylinderGeometry(0.09, 0.12, 1.1, 32) : null;
+        const armGeo = new THREE.CylinderGeometry(0.09, 0.12, 1.1, 32);
         const armMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.95, roughness: 0.1 });
-        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.09, 0.12, 1.1, 32), armMat);
+        const arm = new THREE.Mesh(armGeo, armMat);
         arm.position.set(0, -1.5, -0.2);
         arm.rotation.x = Math.PI / 2.3;
         monitorGroup.add(arm);
