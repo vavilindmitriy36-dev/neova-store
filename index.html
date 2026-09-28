@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOVA — Интернет-магазин техники</title>
-    <link rel="stylesheet" href="style.css?v=7">
+    <link rel="stylesheet" href="style.css?v=8">
 </head>
 <body>
 
@@ -49,25 +49,22 @@
     <!-- Главный экран -->
     <main>
         <section class="hero">
-            
-            <!-- Красивая киберпанк-карточка (рамка) с крутым 3D-монитором внутри -->
             <div class="cyber-display-card">
                 <div class="monitor-container">
                     <canvas id="canvas-3d"></canvas>
                 </div>
             </div>
-
         </section>
 
-        <!-- Популярные товары с точным соответствием картинок -->
+        <!-- Популярные товары с точными, чистыми изображениями -->
         <h2 class="section-title">Выбор покупателей</h2>
         <div class="products-grid">
             
-            <!-- Товар 1: Видеокарта (реальная мощная видеокарта) -->
+            <!-- Товар 1: Видеокарта -->
             <div class="product-card">
                 <div class="badge-sale">-11%</div>
                 <div class="product-img-container">
-                    <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=400&q=80" alt="NVIDIA GeForce RTX 4070">
+                    <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=400&q=80" alt="NVIDIA GeForce RTX 4070">
                 </div>
                 <div class="product-title">NVIDIA GeForce RTX 4070</div>
                 <div class="product-specs">12 GB GDDR6X • PCIe 4.0</div>
@@ -77,10 +74,10 @@
                 </div>
             </div>
 
-            <!-- Товар 2: Процессор (настоящий процессор в сокете) -->
+            <!-- Товар 2: Процессор -->
             <div class="product-card">
                 <div class="product-img-container">
-                    <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?auto=format&fit=crop&w=400&q=80" alt="AMD Ryzen 7 7800X3D">
+                    <img src="https://images.unsplash.com/photo-1591799264168-bc7102e1b12b?auto=format&fit=crop&w=400&q=80" alt="AMD Ryzen 7 7800X3D">
                 </div>
                 <div class="product-title">AMD Ryzen 7 7800X3D</div>
                 <div class="product-specs">8 ядер / 16 потоков • AM5</div>
@@ -124,7 +121,7 @@
         <p>&copy; 2026 NEOVA. Все права защищены.</p>
     </footer>
 
-    <!-- Скрипт для бокового меню -->
+    <!-- Скрипт для меню -->
     <script>
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
@@ -132,7 +129,7 @@
         }
     </script>
 
-    <!-- Трехмерный движок для красивого реалистичного геймерского монитора с RGB-подсветкой -->
+    <!-- 3D Движок монитора (без сетки, с мигающим текстом и правильной инверсией наклона) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const canvas = document.getElementById('canvas-3d');
@@ -146,43 +143,34 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Профессиональное студийное освещение
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1.4);
+        // Студийное освещение
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
         scene.add(ambientLight);
 
-        const cyanLight = new THREE.PointLight(0x00f0ff, 5, 50);
+        const cyanLight = new THREE.PointLight(0x00f0ff, 6, 50);
         cyanLight.position.set(-3, 2, 4);
         scene.add(cyanLight);
 
-        const purpleLight = new THREE.PointLight(0x9d4edd, 4, 50);
+        const purpleLight = new THREE.PointLight(0x9d4edd, 5, 50);
         purpleLight.position.set(3, -2, 4);
         scene.add(purpleLight);
 
-        // Группа для монитора
         const monitorGroup = new THREE.Group();
 
-        // 1. Задняя крышка монитора с RGB-подсветкой (неоновый обод)
+        // 1. Задняя крышка
         const backGeo = new THREE.BoxGeometry(4.4, 2.5, 0.15);
-        const backMat = new THREE.MeshStandardMaterial({ 
-            color: 0x090d16, 
-            metalness: 0.9, 
-            roughness: 0.2 
-        });
+        const backMat = new THREE.MeshStandardMaterial({ color: 0x070b14, metalness: 0.9, roughness: 0.2 });
         const backCover = new THREE.Mesh(backGeo, backMat);
         monitorGroup.add(backCover);
 
-        // 2. Изогнутая рамка экрана (тонкий металл)
+        // 2. Рамка экрана
         const frameGeo = new THREE.BoxGeometry(4.3, 2.4, 0.05);
-        const frameMat = new THREE.MeshStandardMaterial({ 
-            color: 0x1e293b, 
-            metalness: 0.95, 
-            roughness: 0.1 
-        });
+        const frameMat = new THREE.MeshStandardMaterial({ color: 0x111827, metalness: 0.95, roughness: 0.1 });
         const frame = new THREE.Mesh(frameGeo, frameMat);
         frame.position.z = 0.07;
         monitorGroup.add(frame);
 
-        // 3. Экран с красивой графикой NEOVA_OS
+        // 3. Экран (абсолютно чистый OLED-фон без уродливой сетки)
         const screenGeo = new THREE.PlaneGeometry(4.1, 2.22);
         
         const screenCanvas = document.createElement('canvas');
@@ -190,41 +178,30 @@
         screenCanvas.height = 720;
         const ctx = screenCanvas.getContext('2d');
 
-        function drawScreen() {
-            // Градиентный фон экрана
+        function drawScreen(flashAlpha) {
+            // Чистый глубокий черный градиент
             let bgGrad = ctx.createLinearGradient(0, 0, screenCanvas.width, screenCanvas.height);
-            bgGrad.addColorStop(0, '#030712');
-            bgGrad.addColorStop(1, '#0b0f19');
+            bgGrad.addColorStop(0, '#010308');
+            bgGrad.addColorStop(1, '#080c16');
             ctx.fillStyle = bgGrad;
             ctx.fillRect(0, 0, screenCanvas.width, screenCanvas.height);
-            
-            // Тонкая футуристичная сетка
-            ctx.strokeStyle = 'rgba(0, 240, 255, 0.06)';
-            ctx.lineWidth = 2;
-            for(let x=0; x<screenCanvas.width; x+=60) {
-                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, screenCanvas.height); ctx.stroke();
-            }
-            for(let y=0; y<screenCanvas.height; y+=60) {
-                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(screenCanvas.width, y); ctx.stroke();
-            }
 
-            // Неоновый текст логотипа
+            // Неоновый главный логотип NEOVA_OS
             ctx.font = 'bold 85px monospace';
             ctx.fillStyle = '#00f0ff';
             ctx.shadowColor = '#00f0ff';
-            ctx.shadowBlur = 35;
+            ctx.shadowBlur = 40;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
             ctx.fillText('NEOVA_OS v1.0', screenCanvas.width / 2, screenCanvas.height / 2 - 30);
 
-            // Статус-строка
-            ctx.font = 'bold 30px monospace';
-            ctx.fillStyle = '#9d4edd';
+            // Мигающая интерактивная статус-надпись снизу
+            ctx.font = 'bold 32px monospace';
+            ctx.fillStyle = `rgba(157, 78, 221, ${flashAlpha})`;
             ctx.shadowColor = '#9d4edd';
-            ctx.shadowBlur = 15;
-            ctx.fillText('⚡ QUANTUM MATRIX // ONLINE', screenCanvas.width / 2, screenCanvas.height / 2 + 65);
+            ctx.shadowBlur = 20 * flashAlpha;
+            ctx.fillText('⚡ SYSTEM_TRACKING // ACTIVE', screenCanvas.width / 2, screenCanvas.height / 2 + 65);
         }
-        drawScreen();
 
         const screenTexture = new THREE.CanvasTexture(screenCanvas);
         const screenMat = new THREE.MeshBasicMaterial({ map: screenTexture });
@@ -232,7 +209,7 @@
         screenMesh.position.z = 0.1;
         monitorGroup.add(screenMesh);
 
-        // 4. Геймерская подставка (стильная хромированная ножка + тяжелая база)
+        // 4. Подставка
         const armGeo = new THREE.CylinderGeometry(0.09, 0.12, 1.1, 32);
         const armMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.95, roughness: 0.1 });
         const arm = new THREE.Mesh(armGeo, armMat);
@@ -248,7 +225,7 @@
 
         scene.add(monitorGroup);
 
-        // Интерактивное отслеживание тапов и движений мыши по сайту
+        // Управление взглядом (инвертировано: тапаешь вверх — смотрит вверх, тапаешь вниз — смотрит вниз)
         let mouseX = 0;
         let mouseY = 0;
         let targetRotationX = 0;
@@ -256,13 +233,13 @@
 
         window.addEventListener('mousemove', (event) => {
             mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+            mouseY = (event.clientY / window.innerHeight) * 2 - 1; // Убран минус для правильной инверсии
         });
 
         window.addEventListener('touchmove', (event) => {
             if (event.touches.length > 0) {
                 mouseX = (event.touches[0].clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.touches[0].clientY / window.innerHeight) * 2 + 1;
+                mouseY = (event.touches[0].clientY / window.innerHeight) * 2 - 1;
             }
         });
 
@@ -273,15 +250,20 @@
 
             let elapsedTime = clock.getElapsedTime();
 
-            // Монитор плавно и красиво наблюдает за касаниями по всему экрану
+            // Плавное мигание текста статуса (расчет через синусоиду)
+            let flashAlpha = (Math.sin(elapsedTime * 5) + 1) / 2 * 0.5 + 0.5;
+            drawScreen(flashAlpha);
+            screenTexture.needsUpdate = true;
+
+            // Корректный угол поворота
             targetRotationY = mouseX * 0.6; 
-            targetRotationX = mouseY * 0.45; 
+            targetRotationX = -mouseY * 0.45; // Знак минус возвращает естественное слежение за курсором/пальцем
 
             monitorGroup.rotation.y += (targetRotationY - monitorGroup.rotation.y) * 0.07;
             monitorGroup.rotation.x += (targetRotationX - monitorGroup.rotation.x) * 0.07;
 
-            // Живое парение
-            monitorGroup.position.y = Math.sin(elapsedTime * 2.2) * 0.09;
+            // Плавное парение
+            monitorGroup.position.y = Math.sin(elapsedTime * 2.2) * 0.08;
 
             renderer.render(scene, camera);
         }
