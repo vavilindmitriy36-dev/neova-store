@@ -38,6 +38,14 @@ header {
     cursor: pointer;
 }
 
+.logo {
+    font-weight: 800;
+    font-size: 20px;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
 /* --- АНИМИРОВАННЫЙ RGB ЛОГОТИП И СТИКЕР --- */
 @keyframes rgbTextCycle {
     0% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
@@ -234,26 +242,133 @@ header {
     display: block;
 }
 
-/* --- КАТАЛОГ И ФИЛЬТРЫ (ИСПРАВЛЕНО) --- */
-.catalog-controls {
+/* --- КАТАЛОГ И ФИЛЬТРЫ --- */
+.catalog-main {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.catalog-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.sort-container {
     display: flex;
     gap: 10px;
-    padding: 0 20px;
-    margin-bottom: 15px;
     align-items: center;
 }
 
-.filters-container {
-    display: none; /* Скрыто по умолчанию */
+.sort-select {
+    background: #121824;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+.filter-btn-mobile {
+    background: #00f0ff;
+    color: #05070b;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    display: none;
+}
+
+.catalog-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+/* Сайдбар фильтров (десктоп) */
+.filters-sidebar {
     background: #0b111e;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     padding: 20px;
-    margin: 0 20px 20px 20px;
 }
 
-.filters-container.active {
-    display: block; /* Показывается при активации фильтра */
+.filter-header-mobile {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.filter-group {
+    margin-bottom: 20px;
+}
+
+.filter-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #f8fafc;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.custom-checkbox input {
+    accent-color: #00f0ff;
+}
+
+.price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.price-inputs input {
+    width: 100%;
+    background: #121824;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+}
+
+.apply-filters-btn {
+    width: 100%;
+    background: #00f0ff;
+    color: #05070b;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.apply-filters-btn:hover {
+    opacity: 0.9;
 }
 
 /* Сетка товаров */
@@ -265,9 +380,8 @@ header {
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
-    padding: 0 20px 30px 20px;
 }
 
 .product-card {
@@ -296,7 +410,7 @@ header {
 
 .product-img-container {
     width: 100%;
-    height: 110px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -313,14 +427,14 @@ header {
 }
 
 .product-title {
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 600;
     margin-bottom: 4px;
     color: #f8fafc;
 }
 
 .product-specs {
-    font-size: 11px;
+    font-size: 12px;
     color: #64748b;
     margin-bottom: 12px;
 }
@@ -332,7 +446,7 @@ header {
 }
 
 .price {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
     color: #fff;
 }
@@ -358,4 +472,51 @@ footer {
     color: #475569;
     font-size: 12px;
     border-top: 1px solid rgba(255,255,255,0.08);
+    margin-top: 40px;
+}
+
+/* --- АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
+@media (max-width: 768px) {
+    .filter-btn-mobile {
+        display: block;
+    }
+
+    .catalog-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100%;
+        background: #090d16;
+        z-index: 2000;
+        transition: 0.3s ease;
+        overflow-y: auto;
+        border-radius: 0;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+        padding: 20px;
+    }
+
+    .filters-sidebar.active {
+        left: 0;
+    }
+
+    .filter-header-mobile {
+        display: flex;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
 }
