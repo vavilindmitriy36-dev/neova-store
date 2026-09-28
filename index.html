@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOVA — Интернет-магазин техники</title>
-    <link rel="stylesheet" href="style.css?v=12">
+    <link rel="stylesheet" href="style.css?v=13">
 </head>
 <body>
 
@@ -14,7 +14,19 @@
     <!-- Выдвижное боковое меню слева -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <span class="logo">NEOVA</span>
+            <a href="index.html" class="cyber-logo-link">
+                <div class="cyber-logo-container">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <g class="face-eyes">
+                            <circle cx="8.5" cy="9.5" r="1.5" />
+                            <circle cx="15.5" cy="9.5" r="1.5" />
+                        </g>
+                        <path d="M 8 14 Q 12 18 16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+                <span class="cyber-logo-text">NEOVA</span>
+            </a>
             <button class="close-btn" onclick="toggleMenu()">&times;</button>
         </div>
         <div class="sidebar-nav">
@@ -30,7 +42,20 @@
     <header>
         <div class="header-left">
             <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <a href="index.html" class="logo">NEOVA</a>
+            <!-- Интерактивный логотип со смайликом и переливающейся надписью -->
+            <a href="index.html" class="cyber-logo-link">
+                <div class="cyber-logo-container" id="cyberLogo" title="Кликни меня!">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <g class="face-eyes" id="smileEyes">
+                            <circle cx="8.5" cy="9.5" r="1.5" />
+                            <circle cx="15.5" cy="9.5" r="1.5" />
+                        </g>
+                        <path id="smileMouth" d="M 8 14 Q 12 18 16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+                <span class="cyber-logo-text">NEOVA</span>
+            </a>
         </div>
         
         <!-- Строка поиска -->
@@ -121,14 +146,34 @@
         <p>&copy; 2026 NEOVA. Все права защищены.</p>
     </footer>
 
-    <!-- Скрипт для меню -->
+    <!-- Скрипт для меню и смены эмоций логотипа -->
     <script>
         function toggleMenu() {
             document.getElementById('sidebar').classList.toggle('active');
             document.getElementById('overlay').classList.toggle('active');
         }
+
+        // Интерактив для логотипа в шапке (смена лица при клике)
+        const faces = [
+            { eyes: '<circle cx="8.5" cy="9.5" r="1.5"/><circle cx="15.5" cy="9.5" r="1.5"/>', mouth: 'M 8 14 Q 12 18 16 14' }, 
+            { eyes: '<path d="M 7 9 L 10 11 M 7 11 L 10 9" stroke="currentColor" stroke-width="1.5"/><path d="M 14 9 L 17 11 M 14 11 L 17 9" stroke="currentColor" stroke-width="1.5"/>', mouth: 'M 8 15 L 16 15' }, 
+            { eyes: '<circle cx="8.5" cy="9.5" r="2"/><path d="M 14 10 L 17 10" stroke="currentColor" stroke-width="2"/>', mouth: 'M 8 14 Q 12 19 16 14' }, 
+            { eyes: '<path d="M 7 10 Q 8.5 8 10 10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M 14 10 Q 15.5 8 17 10" stroke="currentColor" stroke-width="1.5" fill="none"/>', mouth: 'M 10 14 Q 12 12 14 14' }, 
+        ];
+
+        let currentFaceIndex = 0;
+        const logoContainer = document.getElementById('cyberLogo');
+        
+        if (logoContainer) {
+            logoContainer.addEventListener('click', (e) => {
+                currentFaceIndex = (currentFaceIndex + 1) % faces.length;
+                document.getElementById('smileEyes').innerHTML = faces[currentFaceIndex].eyes;
+                document.getElementById('smileMouth').setAttribute('d', faces[currentFaceIndex].mouth);
+            });
+        }
     </script>
-         <!-- 3D Движок монитора (исправленное вертикальное вращение) -->
+
+    <!-- 3D Движок монитора со встроенным анимированным смайликом внутри -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const canvas = document.getElementById('canvas-3d');
@@ -169,7 +214,7 @@
         frame.position.z = 0.07;
         monitorGroup.add(frame);
 
-        // 3. Экран
+        // 3. Экран с динамическим смайликом
         const screenGeo = new THREE.PlaneGeometry(4.1, 2.22);
         
         const screenCanvas = document.createElement('canvas');
@@ -177,28 +222,67 @@
         screenCanvas.height = 720;
         const ctx = screenCanvas.getContext('2d');
 
-        function drawScreen(flashAlpha) {
+        function drawScreen(elapsedTime) {
             let bgGrad = ctx.createLinearGradient(0, 0, screenCanvas.width, screenCanvas.height);
             bgGrad.addColorStop(0, '#010308');
             bgGrad.addColorStop(1, '#080c16');
             ctx.fillStyle = bgGrad;
             ctx.fillRect(0, 0, screenCanvas.width, screenCanvas.height);
 
-            // Логотип
-            ctx.font = 'bold 85px monospace';
+            let centerX = screenCanvas.width / 2;
+            let centerY = screenCanvas.height / 2 - 40;
+
+            // Рисуем кибер-смайлик на экране монитора
+            ctx.save();
+            ctx.translate(centerX, centerY);
+
+            ctx.shadowColor = '#00f0ff';
+            ctx.shadowBlur = 25;
+            ctx.strokeStyle = '#00f0ff';
+            ctx.lineWidth = 8;
+
+            // Окружность лица
+            ctx.beginPath();
+            ctx.arc(0, 0, 80, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Глаза (моргают)
+            ctx.fillStyle = '#00f0ff';
+            let blink = Math.sin(elapsedTime * 3) > 0.95 ? 0.2 : 1;
+            
+            ctx.save();
+            ctx.scale(1, blink);
+            ctx.beginPath();
+            ctx.arc(-30, -15, 12, 0, Math.PI * 2);
+            ctx.arc(30, -15, 12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            // Улыбка
+            ctx.beginPath();
+            ctx.lineWidth = 8;
+            ctx.lineCap = 'round';
+            ctx.arc(0, 10, 45, 0.1 * Math.PI, 0.9 * Math.PI, false);
+            ctx.stroke();
+
+            ctx.restore();
+
+            // Текст под смайликом
+            ctx.font = 'bold 55px monospace';
             ctx.fillStyle = '#00f0ff';
             ctx.shadowColor = '#00f0ff';
-            ctx.shadowBlur = 40;
+            ctx.shadowBlur = 20;
             ctx.textAlign = 'center';
             ctx.textBaseline = 'middle';
-            ctx.fillText('NEOVA_OS v1.0', screenCanvas.width / 2, screenCanvas.height / 2 - 30);
+            ctx.fillText('NEOVA_OS v1.0', centerX, centerY + 110);
 
             // Мигающая статус-надпись
-            ctx.font = 'bold 32px monospace';
+            let flashAlpha = (Math.sin(elapsedTime * 5) + 1) / 2 * 0.5 + 0.5;
+            ctx.font = 'bold 28px monospace';
             ctx.fillStyle = `rgba(157, 78, 221, ${flashAlpha})`;
             ctx.shadowColor = '#9d4edd';
-            ctx.shadowBlur = 20 * flashAlpha;
-            ctx.fillText('⚡ SYSTEM_TRACKING // ACTIVE', screenCanvas.width / 2, screenCanvas.height / 2 + 65);
+            ctx.shadowBlur = 15;
+            ctx.fillText('⚡ SYSTEM_TRACKING // ACTIVE', centerX, centerY + 175);
         }
 
         const screenTexture = new THREE.CanvasTexture(screenCanvas);
@@ -246,12 +330,11 @@
             requestAnimationFrame(animate);
 
             let elapsedTime = clock.getElapsedTime();
-            let flashAlpha = (Math.sin(elapsedTime * 5) + 1) / 2 * 0.5 + 0.5;
-            drawScreen(flashAlpha);
+            drawScreen(elapsedTime);
             screenTexture.needsUpdate = true;
 
             targetRotationY = mouseX * 0.6; 
-            targetRotationX = mouseY * 0.45; // Исправлено: теперь при нажатии сверху монитор наклоняется вниз, снизу — вверх
+            targetRotationX = mouseY * 0.45; 
 
             monitorGroup.rotation.y += (targetRotationY - monitorGroup.rotation.y) * 0.07;
             monitorGroup.rotation.x += (targetRotationX - monitorGroup.rotation.x) * 0.07;
