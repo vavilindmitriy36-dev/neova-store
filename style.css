@@ -38,7 +38,7 @@ header {
     cursor: pointer;
 }
 
-/* --- АНИМИРОВАННЫЙ RGB ЛОГОТИП И ИКОНКА --- */
+/* --- АНИМИРОВАННЫЙ RGB ЛОГОТИП И СТИКЕР --- */
 @keyframes rgbTextCycle {
     0% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
     33% { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
@@ -76,31 +76,19 @@ header {
     transition: transform 0.1s ease;
 }
 
-/* --- КЛАССЫ ДЛЯ ГЛИТЧА ИКОНКИ --- */
+/* Эффект глитча и искажения на самом стикере */
 .cyber-logo-container.glitch-active svg {
-    animation: iconGlitch 0.2s cubic-bezier(.25, .46, .45, .94) both;
-    filter: drop-shadow(2px -2px 0px #ff0055) drop-shadow(-2px 2px 0px #00f0ff);
+    animation: stickerGlitch 0.25s cubic-bezier(.25, .46, .45, .94) both;
+    filter: drop-shadow(3px -3px 0px #ff0055) drop-shadow(-3px 3px 0px #00f0ff);
 }
 
-@keyframes iconGlitch {
-    0% {
-        transform: translate(0);
-    }
-    20% {
-        transform: translate(-3px, 2px) skew(10deg);
-    }
-    40% {
-        transform: translate(3px, -2px) scale(1.1, 0.9);
-    }
-    60% {
-        transform: translate(-2px, -1px) skew(-15deg);
-    }
-    80% {
-        transform: translate(2px, 2px);
-    }
-    100% {
-        transform: translate(0);
-    }
+@keyframes stickerGlitch {
+    0% { transform: translate(0) skew(0deg); }
+    20% { transform: translate(-4px, 2px) skew(15deg) scale(1.05); }
+    40% { transform: translate(4px, -2px) skew(-15deg) scale(0.95, 1.1); }
+    60% { transform: translate(-2px, -3px) skew(10deg); }
+    80% { transform: translate(3px, 2px) skew(-5deg); }
+    100% { transform: translate(0) skew(0deg); }
 }
 
 /* Поиск */
