@@ -1,4 +1,6 @@
-/* Основные стили страницы */
+/* =========================================
+   ОСНОВНЫЕ СТИЛИ СТРАНИЦЫ
+   ========================================= */
 body {
     background-color: #05070b;
     color: #ffffff;
@@ -50,7 +52,6 @@ header {
     letter-spacing: 1px;
     animation: rgbTextCycle 8s infinite linear;
 }
-
 
 /* Поиск */
 .search-bar {
@@ -305,6 +306,7 @@ footer {
     font-size: 12px;
     border-top: 1px solid rgba(255,255,255,0.05);
 }
+
 /* =========================================
    СТИЛИ ДЛЯ СТРАНИЦЫ КАТАЛОГА (catalog.html)
    ========================================= */
@@ -352,7 +354,7 @@ footer {
     border-radius: 12px;
     font-weight: bold;
     cursor: pointer;
-    display: none; /* Скрыто на ПК */
+    display: none;
 }
 
 .catalog-layout {
@@ -371,7 +373,7 @@ footer {
 }
 
 .filter-header-mobile {
-    display: none; /* Скрыто на ПК */
+    display: none;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
@@ -503,7 +505,7 @@ footer {
     flex-grow: 1;
 }
 
-/* Сетка для ПК (если экран широкий, делаем 3 или 4 колонки) */
+/* Сетка для ПК */
 @media (min-width: 1024px) {
     .catalog-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -545,7 +547,7 @@ footer {
 /* --- Адаптив каталога под телефоны --- */
 @media (max-width: 768px) {
     .filter-btn-mobile {
-        display: block; /* Показываем кнопку на мобилках */
+        display: block;
     }
     
     .catalog-top-bar {
@@ -553,7 +555,6 @@ footer {
         align-items: stretch;
     }
     
-    /* Делаем фильтры выдвижными слева как меню */
     .filters-sidebar {
         position: fixed;
         top: 0;
@@ -575,6 +576,7 @@ footer {
         display: flex;
     }
 }
+
 /* =========================================
    КИБЕР-СМАЙЛИК И ГЛИТЧ-ЭФФЕКТЫ
    ========================================= */
@@ -629,11 +631,3 @@ footer {
     letter-spacing: 1px;
     animation: rgbTextCycle 8s infinite linear;
 }
-
-@keyframes rgbTextCycle {
-    0% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
-    33% { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
-    66% { color: #9d4edd; text-shadow: 0 0 10px rgba(157, 78, 221, 0.4); }
-    100% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
-}
-
