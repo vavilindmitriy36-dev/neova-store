@@ -38,14 +38,6 @@ header {
     cursor: pointer;
 }
 
-.logo {
-    font-weight: 800;
-    font-size: 20px;
-    color: #fff;
-    text-decoration: none;
-    letter-spacing: 1px;
-}
-
 /* --- АНИМИРОВАННЫЙ RGB ЛОГОТИП И СТИКЕР --- */
 @keyframes rgbTextCycle {
     0% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
@@ -84,7 +76,6 @@ header {
     transition: transform 0.1s ease;
 }
 
-/* Эффект глитча и искажения на самом стикере */
 .cyber-logo-container.glitch-active svg {
     animation: stickerGlitch 0.25s cubic-bezier(.25, .46, .45, .94) both;
     filter: drop-shadow(3px -3px 0px #ff0055) drop-shadow(-3px 3px 0px #00f0ff);
@@ -205,7 +196,7 @@ header {
     display: block;
 }
 
-/* --- ГЛАВНЫЙ БАННЕР --- */
+/* Главный баннер */
 .hero-display-container {
     position: relative;
     margin: 20px;
@@ -213,20 +204,6 @@ header {
     border-radius: 28px;
     padding: 15px;
     overflow: hidden;
-    border: none;
-    box-shadow: none;
-}
-
-.hero-display-container::before {
-    content: "NEOVA  //  QUANTUM_DISPLAY_UNIT";
-    position: absolute;
-    top: 14px;
-    left: 25px;
-    font-family: monospace;
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: #00f0ff;
-    z-index: 10;
 }
 
 .monitor-container {
@@ -242,7 +219,7 @@ header {
     display: block;
 }
 
-/* --- КАТАЛОГ И ФИЛЬТРЫ --- */
+/* Каталог и фильтры */
 .catalog-main {
     padding: 20px;
     max-width: 1400px;
@@ -298,7 +275,6 @@ header {
     align-items: start;
 }
 
-/* Сайдбар фильтров (десктоп) */
 .filters-sidebar {
     background: #0b111e;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -475,7 +451,7 @@ footer {
     margin-top: 40px;
 }
 
-/* --- АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ --- */
+/* Адаптивность */
 @media (max-width: 768px) {
     .filter-btn-mobile {
         display: block;
