@@ -391,20 +391,6 @@
         screenMesh.position.z = 0.1;
         monitorGroup.add(screenMesh);
 
-        // Подставка монитора
-        const armGeo = new THREE.CylinderGeometry(0.09, 0.12, 1.1, 32);
-        const armMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.95, roughness: 0.1 });
-        const arm = new THREE.Mesh(armGeo, armMat);
-        arm.position.set(0, -1.5, -0.2);
-        arm.rotation.x = Math.PI / 2.3;
-        monitorGroup.add(arm);
-
-        const baseGeo = new THREE.BoxGeometry(1.8, 0.08, 1.1);
-        const baseMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.9, roughness: 0.15 });
-        const base = new THREE.Mesh(baseGeo, baseMat);
-        base.position.set(0, -2.0, 0.15);
-        monitorGroup.add(base);
-
         scene.add(monitorGroup);
 
         let mouseX = 0;
