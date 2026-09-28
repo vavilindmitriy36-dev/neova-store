@@ -302,3 +302,22 @@ footer {
     color: #475569;
     font-size: 12px;
     border-top: 1px solid rgba(255,255,255,
+   
+
+/* --- АНИМИРОВАННЫЙ RGB ЛОГОТИП --- */
+@keyframes rgbTextCycle {
+    0% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
+    33% { color: #00f0ff; text-shadow: 0 0 10px rgba(0, 240, 255, 0.4); }
+    66% { color: #9d4edd; text-shadow: 0 0 10px rgba(157, 78, 221, 0.4); }
+    100% { color: #ff0055; text-shadow: 0 0 10px rgba(255, 0, 85, 0.4); }
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 20px;
+    text-decoration: none;
+    letter-spacing: 1px;
+    /* Эта строка включает анимацию */
+    animation: rgbTextCycle 8s infinite linear;
+}
+
