@@ -1,1 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEOVA — Доставка и оплата</title>
+    <link rel="stylesheet" href="style.css?v=20">
+    <style>
+        .content-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-header-title {
+            font-size: 26px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card {
+            background: #0b111e;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .info-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00f0ff;
+            margin-top: 0;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card p, .info-card li {
+            font-size: 14px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .info-card ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .info-card li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Затемнение фона при открытии меню -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- Выдвижное боковое меню слева -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="cyber-logo-link">
+                <div class="cyber-logo-container">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <g class="face-eyes">
+                            <circle cx="8.5" cy="9.5" r="1.5" />
+                            <circle cx="15.5" cy="9.5" r="1.5" />
+                        </g>
+                        <path d="M 8 14 Q 12 18 16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+                <span class="cyber-logo-text">NEOVA</span>
+            </a>
+            <button class="close-btn" onclick="toggleMenu()">&times;</button>
+        </div>
+        <div class="sidebar-nav">
+            <a href="index.html">Главная</a>
+            <a href="catalog.html">Каталог товаров</a>
+            <a href="delivery.html" style="color: #00f0ff;">Доставка и оплата</a>
+            <a href="wishlist.html">Избранное</a>
+            <a href="profile.html">Личный кабинет</a>
+        </div>
+    </div>
+
+    <!-- Шапка сайта -->
+    <header>
+        <div class="header-left">
+            <button class="menu-btn" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="cyber-logo-link">
+                <div class="cyber-logo-container" id="cyberLogo" title="Кликни меня!">
+                    <svg viewBox="0 0 24 24" id="logoSvg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <g class="face-eyes" id="smileEyes">
+                            <circle cx="8.5" cy="9.5" r="1.5" />
+                            <circle cx="15.5" cy="9.5" r="1.5" />
+                        </g>
+                        <path id="smileMouth" d="M 8 14 Q 12 18 16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    </svg>
+                </div>
+                <span class="cyber-logo-text">NEOVA</span>
+            </a>
+        </div>
+        
+        <!-- Строка поиска -->
+        <div class="search-bar">
+            <span>🔍</span>
+            <input type="text" placeholder="Поиск техники...">
+        </div>
+
+        <div class="user-nav">
+            <a href="wishlist.html" title="Избранное">🤍</a>
+            <a href="cart.html" title="Корзина">🛒</a>
+            <a href="profile.html" title="Профиль">👤</a>
+        </div>
+    </header>
+
+    <!-- Основной контент страницы -->
+    <main class="content-container">
+        <h1 class="page-header-title">Доставка и оплата</h1>
+
+        <div class="info-card">
+            <h3>📦 Способы доставки</h3>
+            <ul>
+                <li><strong>Курьерская доставка до двери:</strong> Быстро и надежно по всему городу. Доступно на следующий день после оформления заказа.</li>
+                <li><strong>Пункт выдачи заказов (ПВЗ):</strong> Самовывоз из удобного пункта выдачи в любое рабочее время.</li>
+                <li><strong>Экспресс-доставка Quantum:</strong> Ускоренная доставка для приоритетных заказов (уточняйте доступность при оформлении).</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>💳 Способы оплаты</h3>
+            <ul>
+                <li><strong>Банковской картой онлайн:</strong> Visa, MasterCard, Kaspi Gold и другие карты прямо на сайте.</li>
+                <li><strong>Оплата при получении:</strong> Наличными или банковской картой курьеру / в пункте выдачи.</li>
+                <li><strong>Рассрочка и кредит:</strong> Доступны выгодные условия рассрочки от банков-партнеров без переплат.</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>🛡️ Гарантия и возврат</h3>
+            <p>На всю технику распространяется официальная гарантия производителя от 1 года. Вы можете вернуть или обменять товар в течение 14 дней с момента покупки, при условии сохранения товарного вида и комплектации.</p>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <p>&copy; 2026 NEOVA. Все права защищены.</p>
+    </footer>
+
+    <!-- Скрипт для меню и интерактивного логотипа -->
+    <script>
+        function toggleMenu() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('overlay').classList.toggle('active');
+        }
+
+        const faces = [
+            { eyes: '<circle cx="8.5" cy="9.5" r="1.5"/><circle cx="15.5" cy="9.5" r="1.5"/>', mouth: 'M 8 14 Q 12 18 16 14' }, 
+            { eyes: '<path d="M 7 9 L 10 11 M 7 11 L 10 9" stroke="currentColor" stroke-width="1.5"/><path d="M 14 9 L 17 11 M 14 11 L 17 9" stroke="currentColor" stroke-width="1.5"/>', mouth: 'M 8 15 L 16 15' }, 
+            { eyes: '<circle cx="8.5" cy="9.5" r="2"/><path d="M 14 10 L 17 10" stroke="currentColor" stroke-width="2"/>', mouth: 'M 8 14 Q 12 19 16 14' }, 
+            { eyes: '<path d="M 7 10 Q 8.5 8 10 10" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M 14 10 Q 15.5 8 17 10" stroke="currentColor" stroke-width="1.5" fill="none"/>', mouth: 'M 10 14 Q 12 12 14 14' }, 
+        ];
+
+        let currentFaceIndex = 0;
+        const logoContainer = document.getElementById('cyberLogo');
+        
+        if (logoContainer) {
+            logoContainer.addEventListener('click', () => {
+                currentFaceIndex = (currentFaceIndex + 1) % faces.length;
+                document.getElementById('smileEyes').innerHTML = faces[currentFaceIndex].eyes;
+                document.getElementById('smileMouth').setAttribute('d', faces[currentFaceIndex].mouth);
+            });
+        }
+    </script>
+</body>
+</html>
 
