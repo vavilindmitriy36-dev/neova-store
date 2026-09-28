@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOVA — Интернет-магазин техники</title>
-    <link rel="stylesheet" href="style.css?v=9">
+    <link rel="stylesheet" href="style.css?v=10">
 </head>
 <body>
 
@@ -56,7 +56,7 @@
             </div>
         </section>
 
-        <!-- Популярные товары с идеальными, стабильными картинками -->
+        <!-- Популярные товары -->
         <h2 class="section-title">Выбор покупателей</h2>
         <div class="products-grid">
             
@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <!-- Товар 2: Процессор Ryzen (исправленная стабильная картинка) -->
+            <!-- Товар 2: Процессор Ryzen -->
             <div class="product-card">
                 <div class="product-img-container">
                     <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=500&q=80" alt="AMD Ryzen 7 7800X3D">
@@ -129,7 +129,7 @@
         }
     </script>
 
-    <!-- 3D Движок монитора -->
+    <!-- 3D Движок монитора с RGB-подсветкой -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const canvas = document.getElementById('canvas-3d');
@@ -143,21 +143,18 @@
         renderer.setSize(container.clientWidth, container.clientHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Студийное освещение
-        const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+        // Освещение сцены
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
         scene.add(ambientLight);
 
-        const cyanLight = new THREE.PointLight(0x00f0ff, 6, 50);
-        cyanLight.position.set(-3, 2, 4);
-        scene.add(cyanLight);
-
-        const purpleLight = new THREE.PointLight(0x9d4edd, 5, 50);
-        purpleLight.position.set(3, -2, 4);
-        scene.add(purpleLight);
+        // Источник динамического RGB света задней панели
+        const rgbLight = new THREE.PointLight(0x00f0ff, 8, 25);
+        rgbLight.position.set(0, 0, -1.2);
+        scene.add(rgbLight);
 
         const monitorGroup = new THREE.Group();
 
-        // 1. Задняя крышка
+        // 1. Задняя крышка монитора
         const backGeo = new THREE.BoxGeometry(4.4, 2.5, 0.15);
         const backMat = new THREE.MeshStandardMaterial({ color: 0x070b14, metalness: 0.9, roughness: 0.2 });
         const backCover = new THREE.Mesh(backGeo, backMat);
@@ -247,6 +244,13 @@
             requestAnimationFrame(animate);
 
             let elapsedTime = clock.getElapsedTime();
+
+            // Плавное переливание RGB-цветов подсветки по кругу спектра (модуляция через синусоиды)
+            let r = Math.sin(elapsedTime * 1.5) * 127 + 128;
+            let g = Math.sin(elapsedTime * 1.5 + 2) * 127 + 128;
+            let b = Math.sin(elapsedTime * 1.5 + 4) * 127 + 128;
+            rgbLight.color.setRGB(r / 255, g / 255, b / 255);
+
             let flashAlpha = (Math.sin(elapsedTime * 5) + 1) / 2 * 0.5 + 0.5;
             drawScreen(flashAlpha);
             screenTexture.needsUpdate = true;
