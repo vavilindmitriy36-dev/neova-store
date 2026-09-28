@@ -1,305 +1,165 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Каталог — NEOVA</title>
-    <link rel="stylesheet" href="style.css?v=13">
-</head>
-<body>
+/* =========================================
+   СТИЛИ КАТАЛОГА И ФИЛЬТРОВ (ИСПРАВЛЕНО)
+   ========================================= */
 
-    <!-- Затемнение фона при открытии меню -->
-    <div class="overlay" id="overlay" onclick="closeAllMenus()"></div>
+.catalog-main {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
-    <!-- Выдвижное боковое меню слева -->
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-header">
-            <span class="logo">NEOVA</span>
-            <button class="close-btn" onclick="toggleMenu()">&times;</button>
-        </div>
-        <div class="sidebar-nav">
-            <a href="index.html">Главная</a>
-            <a href="catalog.html" style="color: #00f0ff;">Каталог товаров</a>
-            <a href="delivery.html">Доставка и оплата</a>
-            <a href="wishlist.html">Избранное</a>
-            <a href="profile.html">Личный кабинет</a>
-        </div>
-    </div>
+.catalog-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
 
-    <!-- Шапка сайта -->
-    <header>
-        <div class="header-left">
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <a href="index.html" class="logo">NEOVA</a>
-        </div>
-        
-        <div class="search-bar">
-            <span>🔍</span>
-            <input type="text" id="searchInput" placeholder="Поиск в каталоге..." oninput="filterProducts()">
-        </div>
+.page-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
 
-        <div class="user-nav">
-            <a href="wishlist.html" title="Избранное">🤍</a>
-            <a href="cart.html" title="Корзина">🛒</a>
-            <a href="profile.html" title="Профиль">👤</a>
-        </div>
-    </header>
+.sort-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
-    <main class="catalog-main">
-        
-        <!-- Заголовок и сортировка -->
-        <div class="catalog-top-bar">
-            <h1 class="page-title">Каталог техники</h1>
-            <div class="sort-container">
-                <select class="sort-select" id="sortSelect" onchange="sortProducts()">
-                    <option value="popular">По популярности</option>
-                    <option value="cheap">Сначала дешевые</option>
-                    <option value="expensive">Сначала дорогие</option>
-                </select>
-                <!-- Кнопка фильтров для мобилок -->
-                <button class="filter-btn-mobile" onclick="toggleFilters()">🎛 Фильтры</button>
-            </div>
-        </div>
+.sort-select {
+    background: #121824;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 10px;
+    outline: none;
+    cursor: pointer;
+}
 
-        <div class="catalog-layout">
-            <!-- Боковая панель фильтров -->
-            <aside class="filters-sidebar" id="filtersSidebar">
-                <div class="filter-header-mobile">
-                    <h3>Фильтры</h3>
-                    <button class="close-btn" onclick="toggleFilters()">&times;</button>
-                </div>
+.filter-btn-mobile {
+    background: #00f0ff;
+    color: #05070b;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    display: none; /* По умолчанию на десктопе скрыта */
+}
 
-                <div class="filter-group">
-                    <h4 class="filter-title">Категории</h4>
-                    <label class="custom-checkbox"><input type="checkbox" checked value="комлектующие"> Комплектующие <span class="checkmark"></span></label>
-                    <label class="custom-checkbox"><input type="checkbox" checked value="периферия"> Периферия <span class="checkmark"></span></label>
-                    <label class="custom-checkbox"><input type="checkbox" checked value="ноутбуки"> Ноутбуки <span class="checkmark"></span></label>
-                    <label class="custom-checkbox"><input type="checkbox" checked value="смартфоны"> Смартфоны <span class="checkmark"></span></label>
-                    <label class="custom-checkbox"><input type="checkbox" checked value="мониторы"> Мониторы <span class="checkmark"></span></label>
-                </div>
+.catalog-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 25px;
+    align-items: start;
+}
 
-                <div class="filter-group">
-                    <h4 class="filter-title">Цена (₸)</h4>
-                    <div class="price-inputs">
-                        <input type="number" id="priceMin" placeholder="От 10 000">
-                        <span>-</span>
-                        <input type="number" id="priceMax" placeholder="До 1 500 000">
-                    </div>
-                </div>
+/* Сайдбар фильтров */
+.filters-sidebar {
+    background: #0b111e;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 20px;
+}
 
-                <button class="apply-filters-btn" onclick="applyFilters()">Применить</button>
-            </aside>
+.filter-header-mobile {
+    display: none; /* Видно только на мобилках внутри панели */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
 
-            <!-- Сетка товаров (расширенная) -->
-            <div class="catalog-content">
-                <div class="products-grid catalog-grid" id="productsGrid">
-                    
-                    <!-- 1 -->
-                    <div class="product-card" data-title="NVIDIA GeForce RTX 4070" data-price="389990" data-category="комлектующие">
-                        <div class="badge-sale">-11%</div>
-                        <div class="product-img-container">
-                            <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=500&q=80" alt="RTX 4070">
-                        </div>
-                        <div class="product-title">NVIDIA GeForce RTX 4070</div>
-                        <div class="product-specs">12 GB GDDR6X • PCIe 4.0</div>
-                        <div class="product-footer">
-                            <span class="price">389 990 ₸</span>
-                            <button class="cart-btn" onclick="addToCart('NVIDIA GeForce RTX 4070', 389990)">🛒</button>
-                        </div>
-                    </div>
+.filter-group {
+    margin-bottom: 20px;
+}
 
-                    <!-- 2 -->
-                    <div class="product-card" data-title="AMD Ryzen 7 7800X3D" data-price="189990" data-category="комлектующие">
-                        <div class="product-img-container">
-                            <img src="https://images.unsplash.com/photo-1591799264318-7e6ef8ddb7ea?auto=format&fit=crop&w=500&q=80" alt="Ryzen 7">
-                        </div>
-                        <div class="product-title">AMD Ryzen 7 7800X3D</div>
-                        <div class="product-specs">8 ядер / 16 потоков • AM5</div>
-                        <div class="product-footer">
-                            <span class="price">189 990 ₸</span>
-                            <button class="cart-btn" onclick="addToCart('AMD Ryzen 7 7800X3D', 189990)">🛒</button>
-                        </div>
-                    </div>
+.filter-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #f8fafc;
+}
 
-                    <!-- 3 -->
-                    <div class="product-card" data-title="NEOVA Display 27 240Hz" data-price="149990" data-category="мониторы">
-                        <div class="product-img-container">
-                            <img src="https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=500&q=80" alt="Monitor">
-                        </div>
-                        <div class="product-title">NEOVA Display 27" 240Hz</div>
-                        <div class="product-specs">2560x1440 • IPS • 1ms</div>
-                        <div class="product-footer">
-                            <span class="price">149 990 ₸</span>
-                            <button class="cart-btn" onclick="addToCart('NEOVA Display 27 240Hz', 149990)">🛒</button>
-                        </div>
-                    </div>
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
 
-                    <!-- 4 -->
-                    <div class="product-card" data-title="ASUS ROG Strix G16" data-price="799990" data-category="ноутбуки">
-                        <div class="product-img-container">
-                            <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=500&q=80" alt="Laptop">
-                        </div>
-                        <div class="product-title">ASUS ROG Strix G16</div>
-                        <div class="product-specs">i7-13650HX • RTX 4060</div>
-                        <div class="product-footer">
-                            <span class="price">799 990 ₸</span>
-                            <button class="cart-btn" onclick="addToCart('ASUS ROG Strix G16', 799990)">🛒</button>
-                        </div>
-                    </div>
+.custom-checkbox input {
+    accent-color: #00f0ff;
+}
 
-                    <!-- 5 -->
-                    <div class="product-card" data-title="NEOVA Mech-Key V2" data-price="39990" data-category="периферия">
-                        <div class="product-img-container">
-                            <img src="https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=500&q=80" alt="Keyboard">
-                        </div>
-                        <div class="product-title">NEOVA Mech-Key V2</div>
-                        <div class="product-specs">Механика • RGB • Red Switches</div>
-                        <div class="product-footer">
-                            <span class="price">39 990 ₸</span>
-                            <button class="cart-btn" onclick="addToCart('NEOVA Mech-Key V2', 39990)">🛒</button>
-                        </div>
-                    </div>
+.price-inputs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
-                    <!-- 6 -->
-                    <div class="product-card" data-title="Razer DeathAdder V3 Pro" data-price="74990" data-category="периферия">
-                        <div class="product-img-container">
-                            <img src="https://images.unsplash.com/photo-1615663245857-ac1eeb536628?auto=format&fit=crop&w=500&q=80" alt="Mouse">
-                        </div>
-                        <div class="product-title">Razer DeathAdder V3 Pro</div>
-                        <div class="product-specs">Беспроводная • 30K DPI</div>
-                        <div class="product-footer">
-                            <span class="price">74 990 ₸</span>
-                            <button class="cart-btn" onclick="addToCart('Razer DeathAdder V3 Pro', 74990)">🛒</button>
-                        </div>
-                    </div>
+.price-inputs input {
+    width: 100%;
+    background: #121824;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 13px;
+    outline: none;
+}
 
-                    <!-- 7 -->
-                    <div class="product-card" data-title="NEOVA Audio 7.1 Wireless" data-price="47990" data-category="периферия">
-                        <div class="badge-sale">-20%</div>
-                        <div class="product-img-container">
-                            <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?auto=format&fit=crop&w=500&q=80" alt="Headset">
-                        </div>
-                        <div class="product-title">NEOVA Audio 7.1 Wireless</div>
-                        <div class="product-specs">Bluetooth 5.3 • ANC</div>
-                        <div class="product-footer">
-                            <span class="price">47 990 ₸</span>
-                            <button class="cart-btn" onclick="addToCart('NEOVA Audio 7.1 Wireless', 47990)">🛒</button>
-                        </div>
-                    </div>
+.apply-filters-btn {
+    width: 100%;
+    background: #00f0ff;
+    color: #05070b;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+}
 
-                    <!-- 8 -->
-                    <div class="product-card" data-title="NEOVA Smartphone Pro" data-price="279990" data-category="смартфоны">
-                        <div class="product-img-container">
-                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80" alt="Smartphone">
-                        </div>
-                        <div class="product-title">NEOVA Smartphone Pro</div>
-                        <div class="product-specs">6.7" AMOLED • 256 GB</div>
-                        <div class="product-footer">
-                            <span class="price">279 990 ₸</span>
-                            <button class="cart-btn" onclick="addToCart('NEOVA Smartphone Pro', 279990)">🛒</button>
-                        </div>
-                    </div>
+.apply-filters-btn:hover {
+    opacity: 0.9;
+}
 
-                </div>
-            </div>
-        </div>
-    </main>
+/* Адаптивность для мобильных устройств (чтобы фильтры выезжали и не ломали сетку) */
+@media (max-width: 768px) {
+    .filter-btn-mobile {
+        display: block;
+    }
 
-    <!-- Подвал -->
-    <footer>
-        <p>&copy; 2026 NEOVA. Все права защищены.</p>
-    </footer>
+    .catalog-layout {
+        grid-template-columns: 1fr;
+    }
 
-    <!-- Интерактивные скрипты -->
-    <script>
-        function toggleMenu() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
+    .filters-sidebar {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 280px;
+        height: 100%;
+        background: #090d16;
+        z-index: 2000;
+        transition: 0.3s ease;
+        overflow-y: auto;
+        border-radius: 0;
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+    }
 
-        function toggleFilters() {
-            document.getElementById('filtersSidebar').classList.toggle('active');
-            document.getElementById('overlay').classList.toggle('active');
-        }
+    .filters-sidebar.active {
+        left: 0;
+    }
 
-        function closeAllMenus() {
-            document.getElementById('sidebar').classList.remove('active');
-            document.getElementById('filtersSidebar').classList.remove('active');
-            document.getElementById('overlay').classList.remove('active');
-        }
-
-        // Функция добавления товара в корзину (сохранение в LocalStorage)
-        function addToCart(title, price) {
-            let cart = JSON.parse(localStorage.getItem('neova_cart')) || [];
-            cart.push({ title, price });
-            localStorage.setItem('neova_cart', JSON.stringify(cart));
-            alert(`Товар "${title}" добавлен в корзину! 🛒`);
-        }
-
-        // Живой поиск по названию в шапке
-        function filterProducts() {
-            let query = document.getElementById('searchInput').value.toLowerCase();
-            let cards = document.querySelectorAll('.product-card');
-
-            cards.forEach(card => {
-                let title = card.getAttribute('data-title').toLowerCase();
-                if (title.includes(query)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Фильтрация по чекбоксам и цене
-        function applyFilters() {
-            let checkboxes = document.querySelectorAll('.filter-group input[type="checkbox"]');
-            let selectedCategories = Array.from(checkboxes)
-                .filter(i => i.checked)
-                .map(i => i.value);
-
-            let minPrice = parseFloat(document.getElementById('priceMin').value) || 0;
-            let maxPrice = parseFloat(document.getElementById('priceMax').value) || Infinity;
-
-            let cards = document.querySelectorAll('.product-card');
-
-            cards.forEach(card => {
-                let category = card.getAttribute('data-category');
-                let price = parseFloat(card.getAttribute('data-price'));
-
-                let matchesCategory = selectedCategories.includes(category);
-                let matchesPrice = price >= minPrice && price <= maxPrice;
-
-                if (matchesCategory && matchesPrice) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Закрываем панель фильтров на мобильных после применения
-            if (window.innerWidth <= 768) {
-                toggleFilters();
-            }
-        }
-
-        // Сортировка товаров
-        function sortProducts() {
-            let grid = document.getElementById('productsGrid');
-            let cards = Array.from(grid.getElementsByClassName('product-card'));
-            let sortType = document.getElementById('sortSelect').value;
-
-            cards.sort((a, b) => {
-                let priceA = parseFloat(a.getAttribute('data-price'));
-                let priceB = parseFloat(b.getAttribute('data-price'));
-
-                if (sortType === 'cheap') return priceA - priceB;
-                if (sortType === 'expensive') return priceB - priceA;
-                return 0; // 'popular' по умолчанию оставляем как есть
-            });
-
-            cards.forEach(card => grid.appendChild(card));
-        }
-    </script>
-</body>
-</html>
+    .filter-header-mobile {
+        display: flex;
+    }
+}
