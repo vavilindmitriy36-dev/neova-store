@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEOVA — Интернет-магазин техники</title>
-    <link rel="stylesheet" href="style.css?v=18">
+    <link rel="stylesheet" href="style.css?v=20">
 </head>
 <body>
 
@@ -204,7 +204,7 @@
         scheduleNextGlitch();
     </script>
 
-    <!-- 3D Движок монитора (чистый экран) -->
+    <!-- 3D Движок монитора (исправленный ровный экран) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         const canvas = document.getElementById('canvas-3d');
@@ -244,7 +244,7 @@
         frame.position.z = 0.07;
         monitorGroup.add(frame);
 
-        // Экран монитора (статичный аккуратный фон без резких помех)
+        // Экран монитора (ровный центрированный смайлик)
         const screenGeo = new THREE.PlaneGeometry(4.1, 2.22);
         
         const screenCanvas = document.createElement('canvas');
@@ -262,7 +262,7 @@
             let centerX = screenCanvas.width / 2;
             let centerY = screenCanvas.height / 2 - 40;
 
-            // Спокойный смайлик на экране монитора
+            // Контур смайлика по центру
             ctx.strokeStyle = '#00f0ff';
             ctx.fillStyle = '#00f0ff';
             ctx.shadowColor = '#00f0ff';
@@ -270,7 +270,7 @@
             ctx.lineWidth = 8;
 
             ctx.beginPath();
-            ctx.arc(0, 0, 80, 0, Math.PI * 2);
+            ctx.arc(centerX, centerY, 80, 0, Math.PI * 2);
             ctx.stroke();
 
             // Глаза
